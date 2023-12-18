@@ -7,4 +7,17 @@ import java.time.LocalDate;
 
 public class Biglietto extends TitoloDiViaggio{
     private LocalDate emissione = LocalDate.now();
+
+    public Biglietto (){}
+
+    public LocalDate getEmissione() {
+        return emissione;
+    }
+
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "emissione=" + emissione +
+                '}';
+    }
 }

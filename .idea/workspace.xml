@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Autobus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tratta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/VALIDITA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Abonamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Abonamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Biglietto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Biglietto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -43,15 +43,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Larionov",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
