@@ -1,14 +1,12 @@
 package BuildWeek1BETeam3.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "abonamento")
-public class Abonamento extends TitoloDiViaggio{
+public class Abbonamento extends TitoloDiViaggio{
+
+    @ManyToOne
     private Tessera tessera;
 
     private LocalDate emissione = LocalDate.now();
@@ -16,9 +14,9 @@ public class Abonamento extends TitoloDiViaggio{
     private VALIDITA validita;
     private LocalDate scadenza;
 
-    public Abonamento(){}
+    public Abbonamento(){}
 
-    public Abonamento(Tessera tessera, VALIDITA validita) {
+    public Abbonamento(Tessera tessera, VALIDITA validita) {
         this.tessera = tessera;
         this.validita = validita;
         if(validita.equals(VALIDITA.SETTIMANALE)){

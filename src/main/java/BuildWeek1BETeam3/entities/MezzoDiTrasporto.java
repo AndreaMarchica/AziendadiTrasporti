@@ -1,16 +1,22 @@
 package BuildWeek1BETeam3.entities;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "mezzi_di_trasporto")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="mezzi_di_trasporto")
 public abstract class MezzoDiTrasporto {
 
     /*ATTRIBUTI*/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private UUID id;
     private int capienza;
     private LocalDate dataPrimoImpiego;
@@ -18,6 +24,15 @@ public abstract class MezzoDiTrasporto {
     private StatoManutenzione manutenzione;
     private LocalDate dataInizioManutenzione;
     private LocalDate dataFineManutenzione;
+
+    @ManyToMany
+    @JoinTable(
+            name = "mezzoditrasporto_tratta",
+            joinColumns = @JoinColumn(name = "mezzoditrasporto_id"),
+            inverseJoinColumns = @JoinColumn(name = "tratta_id")
+    )
+    private List<Tratta> tratte = new ArrayList<>();
+
 
     /*COSTRUTTORI*/
 

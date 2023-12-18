@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "rivenditore_autorizzato"   )
 public class RivenditoreAutorizzato extends PuntoDiEmissione  {
     public RivenditoreAutorizzato() {
     }

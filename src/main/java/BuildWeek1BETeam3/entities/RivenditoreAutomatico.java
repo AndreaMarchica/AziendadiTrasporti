@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "rivenditore_automatico")
 public class RivenditoreAutomatico extends PuntoDiEmissione{
 
     @Column(name = "in_servizio")

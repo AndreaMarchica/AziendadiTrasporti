@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public class Application {
 
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendadiTrasporti");
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 

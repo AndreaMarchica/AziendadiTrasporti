@@ -4,10 +4,9 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Utente")
 public class Utente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id_utente;
 
     @Column ( name = "nome_utente")
@@ -15,6 +14,10 @@ public class Utente {
 
     @Column ( name = "cognome_utente")
     public  String cognome_utente;
+
+    @OneToOne
+    private Tessera tessera;
+
 
     public Utente(String nome_utente, String cognome_utente) {
         this.nome_utente = nome_utente;

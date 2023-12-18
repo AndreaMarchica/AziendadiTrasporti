@@ -5,7 +5,6 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "biglietto")
 public class Biglietto extends TitoloDiViaggio{
     private LocalDate emissione = LocalDate.now();
 

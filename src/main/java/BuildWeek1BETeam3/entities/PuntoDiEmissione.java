@@ -4,12 +4,11 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "punti_di_emissione")
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_prodotto")
 public abstract class PuntoDiEmissione {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID codice_ID;
 
     @Column(name = "Luogo")
