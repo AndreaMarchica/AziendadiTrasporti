@@ -14,8 +14,8 @@ public class Tram extends MezzoDiTrasporto {
     public Tram() {
     }
 
-    public Tram(UUID id, int capienza, LocalDate dataPrimoImpiego) {
-        super(id, capienza, dataPrimoImpiego);
+    public Tram(int capienza, LocalDate dataPrimoImpiego) {
+        super(capienza, dataPrimoImpiego);
     }
 
     /*METODI*/
@@ -23,11 +23,6 @@ public class Tram extends MezzoDiTrasporto {
     @Override
     public UUID getId() {
         return super.getId();
-    }
-
-    @Override
-    public void setId(UUID id) {
-        super.setId(id);
     }
 
     @Override
@@ -51,8 +46,8 @@ public class Tram extends MezzoDiTrasporto {
     }
 
     @Override
-    public void manutenzione() {
-        super.manutenzione();
+    public void setMaunutenzione(StatoManutenzione manutenzione) {
+        super.setMaunutenzione(manutenzione);
     }
 
     @Override

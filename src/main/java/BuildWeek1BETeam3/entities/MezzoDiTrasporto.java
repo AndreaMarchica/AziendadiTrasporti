@@ -14,26 +14,32 @@ public abstract class MezzoDiTrasporto {
     private UUID id;
     private int capienza;
     private LocalDate dataPrimoImpiego;
+    private StatoManutenzione manutenzione;
+    private LocalDate dataInizioManutenzione;
+    private LocalDate dataFineManutenzione;
 
     /*COSTRUTTORI*/
 
     public MezzoDiTrasporto() {
     }
 
-    public MezzoDiTrasporto(UUID id, int capienza, LocalDate dataPrimoImpiego) {
-        this.id = id;
+    public MezzoDiTrasporto(int capienza, LocalDate dataPrimoImpiego) {
         this.capienza = capienza;
         this.dataPrimoImpiego = dataPrimoImpiego;
+        this.manutenzione = StatoManutenzione.IN_SERVIZIO;
     }
 
     /*METODI*/
 
+    public void setMaunutenzione(StatoManutenzione manutenzione) {
+        this.manutenzione = manutenzione;
+        if (manutenzione.equals(StatoManutenzione.IN_MANUTENZIONE)) {
+            this.dataInizioManutenzione = LocalDate.now();
+        } else { this.dataFineManutenzione = LocalDate.now();
+    }}
+
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public int getCapienza() {
@@ -51,8 +57,6 @@ public abstract class MezzoDiTrasporto {
     public void setDataPrimoImpiego(LocalDate dataPrimoImpiego) {
         this.dataPrimoImpiego = dataPrimoImpiego;
     }
-    public void manutenzione(){
-    };
 
     @Override
     public String toString() {
