@@ -14,6 +14,7 @@ public abstract class MezzoDiTrasporto {
     private UUID id;
     private int capienza;
     private LocalDate dataPrimoImpiego;
+    @Enumerated
     private StatoManutenzione manutenzione;
     private LocalDate dataInizioManutenzione;
     private LocalDate dataFineManutenzione;
