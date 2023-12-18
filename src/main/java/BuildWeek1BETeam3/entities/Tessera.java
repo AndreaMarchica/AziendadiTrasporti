@@ -1,12 +1,10 @@
 package BuildWeek1BETeam3.entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
-
+@Entity
+@Table(name = "tessera")
 public class Tessera {
 
     @Id

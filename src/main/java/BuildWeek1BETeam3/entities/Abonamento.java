@@ -3,9 +3,11 @@ package BuildWeek1BETeam3.entities;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "abonamento")
 public class Abonamento extends TitoloDiViaggio{
     private Tessera tessera;
 
