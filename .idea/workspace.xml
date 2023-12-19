@@ -7,12 +7,6 @@
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/PuntoDiEmissione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/PuntoDiEmissione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/RivenditoreAutomatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/RivenditoreAutomatico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tessera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tessera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Utente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,10 +43,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Application.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Andrea",
+    "git-widget-placeholder": "Larionov",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "proofread"
   }
