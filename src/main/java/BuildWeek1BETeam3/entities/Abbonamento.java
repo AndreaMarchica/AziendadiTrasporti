@@ -9,7 +9,7 @@ public class Abbonamento extends TitoloDiViaggio{
     @ManyToOne
     private Tessera tessera;
 
-    private LocalDate emissione = LocalDate.now();
+    private LocalDate emissione;
     @Enumerated(EnumType.STRING)
     private VALIDITA validita;
     private LocalDate scadenza;
@@ -19,6 +19,7 @@ public class Abbonamento extends TitoloDiViaggio{
     public Abbonamento(Tessera tessera, VALIDITA validita) {
         this.tessera = tessera;
         this.validita = validita;
+        this.emissione = LocalDate.now();
         if(validita.equals(VALIDITA.SETTIMANALE)){
             this.scadenza = LocalDate.now().plusDays(7);
         }else {
