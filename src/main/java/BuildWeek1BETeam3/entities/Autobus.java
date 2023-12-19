@@ -46,10 +46,6 @@ public class Autobus extends MezzoDiTrasporto {
         super.setDataPrimoImpiego(dataPrimoImpiego);
     }
 
-    @Override
-    public void setMaunutenzione(StatoManutenzione manutenzione) {
-        super.setMaunutenzione(manutenzione);
-    }
 
     @Override
     public String toString() {
