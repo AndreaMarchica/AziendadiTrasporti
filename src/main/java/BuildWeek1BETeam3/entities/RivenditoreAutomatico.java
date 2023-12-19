@@ -8,20 +8,20 @@ import javax.persistence.Table;
 public class RivenditoreAutomatico extends PuntoDiEmissione{
 
     @Column(name = "in_servizio")
-    private boolean in_servizio;
+    public static boolean in_servizio;
 
 
     public RivenditoreAutomatico(boolean in_servizio) {
         this.in_servizio = in_servizio;
     }
-    public RivenditoreAutomatico( ) {
+    public RivenditoreAutomatico() {
     }
     public RivenditoreAutomatico(String luogo, boolean in_servizio) {
         super(luogo);
         this.in_servizio = in_servizio;
     }
 
-    public boolean isIn_servizio() {
+    public static boolean isIn_servizio() {
         return in_servizio;
     }
 

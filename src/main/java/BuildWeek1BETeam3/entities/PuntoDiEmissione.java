@@ -37,4 +37,18 @@ public abstract class PuntoDiEmissione {
     public void setLuogo(String luogo) {
         this.luogo = luogo;
     }
+
+    public Biglietto stampaBiglietto() {
+        if(!RivenditoreAutomatico.isIn_servizio()){
+            System.out.println("Rivenditore fuori servizio!");
+        } else {
+        Biglietto b = new Biglietto();
+        titoliDiViaggio.add(b);
+        return b;
+    }
+        return null;
+    }
+    public Abbonamento stampaAbbonamento(Tessera tessera, VALIDITA validita) {
+        return new Abbonamento();
+    }
 }
