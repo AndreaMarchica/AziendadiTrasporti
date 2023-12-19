@@ -20,10 +20,8 @@ public abstract class MezzoDiTrasporto {
     private UUID id;
     private int capienza;
     private LocalDate dataPrimoImpiego;
-    @Enumerated
-    private StatoManutenzione manutenzione;
-    private LocalDate dataInizioManutenzione;
-    private LocalDate dataFineManutenzione;
+
+
 
     @ManyToMany
     @JoinTable(
@@ -32,6 +30,10 @@ public abstract class MezzoDiTrasporto {
             inverseJoinColumns = @JoinColumn(name = "tratta_id")
     )
     private List<Tratta> tratte = new ArrayList<>();
+
+@ManyToOne
+@JoinColumn(name="Mezzo_id")
+private Stato stato;
 
 
     /*COSTRUTTORI*/
@@ -42,17 +44,12 @@ public abstract class MezzoDiTrasporto {
     public MezzoDiTrasporto(int capienza, LocalDate dataPrimoImpiego) {
         this.capienza = capienza;
         this.dataPrimoImpiego = dataPrimoImpiego;
-        this.manutenzione = StatoManutenzione.IN_SERVIZIO;
+
     }
 
     /*METODI*/
 
-    public void setMaunutenzione(StatoManutenzione manutenzione) {
-        this.manutenzione = manutenzione;
-        if (manutenzione.equals(StatoManutenzione.IN_MANUTENZIONE)) {
-            this.dataInizioManutenzione = LocalDate.now();
-        } else { this.dataFineManutenzione = LocalDate.now();
-    }}
+
 
     public UUID getId() {
         return id;
@@ -74,6 +71,7 @@ public abstract class MezzoDiTrasporto {
         this.dataPrimoImpiego = dataPrimoImpiego;
     }
 
+
     @Override
     public String toString() {
         return "MezzoDiTrasporto{" +
@@ -82,4 +80,6 @@ public abstract class MezzoDiTrasporto {
                 ", dataPrimoImpiego=" + dataPrimoImpiego +
                 '}';
     }
+
+
 }
