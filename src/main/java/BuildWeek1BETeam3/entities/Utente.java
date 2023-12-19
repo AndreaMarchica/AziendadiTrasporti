@@ -15,7 +15,7 @@ public class Utente {
     @Column ( name = "cognome_utente")
     public  String cognome_utente;
 
-    @OneToOne
+    @OneToOne(mappedBy = "utente")
     private Tessera tessera;
 
 

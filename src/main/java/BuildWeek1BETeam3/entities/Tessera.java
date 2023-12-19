@@ -15,7 +15,8 @@ public class Tessera {
     private UUID id_tessera;
 
     @OneToOne
-    private Utente  utente;
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
     @Column(name = "data_emissione")
     private LocalDate data_emissione;
@@ -31,14 +32,11 @@ public class Tessera {
     private RivenditoreAutorizzato rivenditore;
 
 
-
-    // aggiungere abbonamento id
-
-
-
     public Tessera(){}
     public Tessera(Utente utente) {
         this.utente = utente;
+        this.data_emissione = LocalDate.now();
+        this.data_scadenza = LocalDate.now().plusYears(1);
     }
 
     public UUID getId_tessera() {
