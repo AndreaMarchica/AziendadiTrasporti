@@ -25,6 +25,12 @@ public class Tratta {
     )
     private List<MezzoDiTrasporto> mezzi = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name="storico_tratte")
+    private StoricoTratte storicoTratte;
+
+
+
     /*COSTRUTTORI*/
 
     public Tratta() {
