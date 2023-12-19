@@ -16,11 +16,11 @@ public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendadiTrasporti");
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
-
-        System.out.println("Hello World!");
-
-
         TrattaDAO td = new TrattaDAO(em);
+        UtenteDAO ud = new UtenteDAO(em);
+
+//        ****************************************CREAZIONE DELLE TRATTE*********************************************
+
         Tratta Linea1 = new Tratta("Piazza della Libertà", "via Svevo", 20);
         Tratta Linea3 = new Tratta("Conconello", "Piazza della Libertà", 45);
         Tratta Linea4 = new Tratta("Villa Carsia", "Piazza Oberdan", 30);
@@ -30,6 +30,9 @@ public class Application {
         Tratta Linea8 = new Tratta("Roiano", "Via Valmaura", 45);
         Tratta Linea9 = new Tratta("piazzale Gioberti", "largo Irneri", 30);
         Tratta Linea10 = new Tratta("piazza Tommaseo", "Via Valmaura", 40);
+
+//        ****************************************SALVATAGGIO NEL DB DELLE TRATTE****************************
+
         td.save(Linea1);
         td.save(Linea3);
         td.save(Linea4);
@@ -40,7 +43,8 @@ public class Application {
         td.save(Linea9);
         td.save(Linea10);
 
-        UtenteDAO ud = new UtenteDAO(em);
+//        ****************************************CREAZIONE DEGLI UTENTI************************************
+
         Utente aldo = new Utente("Aldo", "Baglio");
         Utente giovanni = new Utente("Giovanni", "Storti");
         Utente giacomo = new Utente("Giacomo", "Poretti");
@@ -51,6 +55,9 @@ public class Application {
         Utente francesco = new Utente ( "Francesco" , "de Gregori");
         Utente andrea = new Utente ( "Andrea" , "Boccelli");
         Utente niccolò  = new Utente ( "Niccolò " , "Paganini");
+
+//        ****************************************SALVATAGGIO NEL DB ****************************************
+
         ud.save(aldo);
         ud.save(giovanni);
         ud.save(giacomo);
@@ -67,5 +74,6 @@ public class Application {
 
         em.close();
         emf.close();
+        System.out.println("Hello World!");
     }
 }

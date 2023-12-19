@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@NamedQuery(name = "Tessera.isAbbonamentoValidoById",
-        query = "SELECT t.isAbbonamentoValido FROM Tessera t WHERE t.id_tessera = :idTessera"
-)
 @Entity
+//@NamedQuery(name = "Tessera.isAbbonamentoValidoById", query = "SELECT t.isAbbonamentoValido FROM Tessera t WHERE t.id_tessera = :idTessera")
 public class Tessera {
 
     @Id
