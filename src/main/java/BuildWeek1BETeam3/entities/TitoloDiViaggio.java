@@ -32,4 +32,21 @@ public abstract class TitoloDiViaggio {
                 "uuid=" + uuid +
                 '}';
     }
+
+
+    public PuntoDiEmissione getPuntodiemissione() {
+        return puntodiemissione;
+    }
+
+    public void setPuntodiemissione(PuntoDiEmissione puntodiemissione) {
+        this.puntodiemissione = puntodiemissione;
+    }
+
+    public MezzoDiTrasporto getMezzoditrasporto() {
+        return mezzoditrasporto;
+    }
+
+    public void setMezzoditrasporto(MezzoDiTrasporto mezzoditrasporto) {
+        this.mezzoditrasporto = mezzoditrasporto;
+    }
 }

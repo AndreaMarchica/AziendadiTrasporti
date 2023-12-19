@@ -3,6 +3,8 @@ package BuildWeek1BETeam3.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RivenditoreAutomatico extends PuntoDiEmissione{
@@ -27,6 +29,23 @@ public class RivenditoreAutomatico extends PuntoDiEmissione{
 
     public void setIn_servizio(boolean in_servizio) {
         this.in_servizio = in_servizio;
+    }
+
+    public Biglietto stampaBiglietto() {
+        if(!RivenditoreAutomatico.isIn_servizio()){
+            System.out.println("Rivenditore automatico fuori servizio!");
+        } else {
+            Biglietto b = new Biglietto();
+            List<TitoloDiViaggio> listaBiglietti = getTitoliDiViaggio();
+            if(listaBiglietti == null){
+                listaBiglietti = new ArrayList<>();
+            }
+            listaBiglietti.add(b);
+            setTitoliDiViaggio(listaBiglietti);
+            b.setPuntodiemissione(this);
+            return b;
+        }
+        return null;
     }
 
     @Override

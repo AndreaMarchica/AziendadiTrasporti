@@ -19,11 +19,10 @@ public class Application {
         EntityManager em = emf.createEntityManager();
         Faker faker = new Faker(Locale.ITALIAN);
 
-
         Supplier<LocalDate> dateSupplier = () -> {
             Random rdm = new Random();
             int randomYear = rdm.nextInt(2000,2024);
-            int randomDay = rdm.nextInt(1,30);
+            int randomDay = rdm.nextInt(1,29);
             int randomMonth = rdm.nextInt(1,12);
             return LocalDate.of(randomYear, randomMonth,randomDay);
         };
@@ -61,15 +60,15 @@ public class Application {
         td.save(Linea9);
         td.save(Linea10);
 
-//        ****************************************CREAZIONE DEGLI UTENTI************************************
-
+//    ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
 
         for (int i = 0; i < 10; i++){
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
 
-//        **************************************** CREAZIONE DEI TRAM ****************************************
+
+//   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
 
         for (int i = 0; i < 10; i++){
             Random rndm = new Random();
@@ -86,18 +85,25 @@ public class Application {
             mtd.save(a);
         }
 
- //         **************************************** CREAZIONE DELLE TESSERE *******************************
-
+ //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
 
         ud.getAll().forEach(utente -> {
             Tessera tessera = new Tessera(utente);
             tsd.save(tessera);
         });
 
-
-
  //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
 
+        Biglietto biglietto1 = new Biglietto();
+        Biglietto biglietto2 = new Biglietto();
+        Biglietto biglietto3 = new Biglietto();
+        Biglietto biglietto4 = new Biglietto();
+        Biglietto biglietto5 = new Biglietto();
+
+        tsd.getAll().forEach( tessera -> {
+            Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
+            tvd.save(abbonamento);
+        });
 
 
         tsd.getAll().forEach( tessera -> {
@@ -108,16 +114,23 @@ public class Application {
 
 
  //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
-
-        RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
+        for (int i = 0; i <10; i++){
+            Random rdm = new Random();
+            int a = rdm.nextInt(0, 2);
+            boolean b;
+            b = a == 1 ;
+            RivenditoreAutomatico raut = new RivenditoreAutomatico(faker.address().streetAddress(), b);
+            ped.save(raut);
+        }
+/*        RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
         RivenditoreAutomatico aRiv2 = new RivenditoreAutomatico("Garbatella", false);
         RivenditoreAutomatico aRiv3 = new RivenditoreAutomatico("Centocelle", true);
         RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
-        RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
+        RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");*/
 
  //           ****************************************SALVATAGGIO NEL DB ****************************************
 
-        ped.save(aRiv1);
+/*        ped.save(aRiv1);
         ped.save(aRiv2);
         ped.save(aRiv3);
         ped.save(riv4);
