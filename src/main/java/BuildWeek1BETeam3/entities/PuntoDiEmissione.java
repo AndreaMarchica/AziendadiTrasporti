@@ -38,6 +38,14 @@ public abstract class PuntoDiEmissione {
         this.luogo = luogo;
     }
 
+    public List<TitoloDiViaggio> getTitoliDiViaggio() {
+        return titoliDiViaggio;
+    }
+
+    public void setTitoliDiViaggio(List<TitoloDiViaggio> titoliDiViaggio) {
+        this.titoliDiViaggio = titoliDiViaggio;
+    }
+
     public Biglietto stampaBiglietto() {
         if(!RivenditoreAutomatico.isIn_servizio()){
             System.out.println("Rivenditore fuori servizio!");
