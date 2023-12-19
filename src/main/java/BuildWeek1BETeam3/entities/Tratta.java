@@ -36,11 +36,20 @@ public class Tratta {
     public Tratta() {
     }
 
-    public Tratta(UUID uuid, String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza, MezzoDiTrasporto mezzoDiTrasporto) {
-        this.id = uuid;
+    public Tratta( String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza, MezzoDiTrasporto mezzoDiTrasporto) {
+
         this.zonaDiPartenza = zonaDiPartenza;
         this.capolinea = capolinea;
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
+
+    }
+
+    public Tratta( String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza) {
+
+        this.zonaDiPartenza = zonaDiPartenza;
+        this.capolinea = capolinea;
+        this.tempoMedioPercorrenza = tempoMedioPercorrenza;
+
     }
 
     /*METODI*/
