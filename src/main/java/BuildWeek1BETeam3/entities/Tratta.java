@@ -1,21 +1,29 @@
 package BuildWeek1BETeam3.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tratte")
 public class Tratta {
 
     /*ATTRIBUTI*/
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String zonaDiPartenza;
     private String capolinea;
     private int tempoMedioPercorrenza;
-    private MezzoDiTrasporto mezzoDiTrasporto;
+
+    @ManyToMany
+    @JoinTable(
+            name = "mezzoditrasporto_tratta",
+            joinColumns = @JoinColumn(name = "tratta_id"),
+            inverseJoinColumns = @JoinColumn(name = "mezzoditrasporto_id")
+    )
+    private List<MezzoDiTrasporto> mezzi = new ArrayList<>();
 
     /*COSTRUTTORI*/
 
@@ -27,7 +35,6 @@ public class Tratta {
         this.zonaDiPartenza = zonaDiPartenza;
         this.capolinea = capolinea;
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
-        this.mezzoDiTrasporto = mezzoDiTrasporto;
     }
 
     /*METODI*/
@@ -64,13 +71,6 @@ public class Tratta {
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
     }
 
-    public MezzoDiTrasporto getMezzoDiTrasporto() {
-        return mezzoDiTrasporto;
-    }
-
-    public void setMezzoDiTrasporto(MezzoDiTrasporto mezzoDiTrasporto) {
-        this.mezzoDiTrasporto = mezzoDiTrasporto;
-    }
 
     @Override
     public String toString() {
@@ -79,7 +79,7 @@ public class Tratta {
                 ", zonaDiPartenza='" + zonaDiPartenza + '\'' +
                 ", capolinea='" + capolinea + '\'' +
                 ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
-                ", mezzoDiTrasporto=" + mezzoDiTrasporto +
+                ", mezzoDiTrasporto="  +
                 '}';
     }
 }

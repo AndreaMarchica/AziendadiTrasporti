@@ -1,12 +1,13 @@
 package BuildWeek1BETeam3.entities;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tram")
+@DiscriminatorValue("tram")
 public class Tram extends MezzoDiTrasporto {
 
     /*COSTRUTTORI*/
