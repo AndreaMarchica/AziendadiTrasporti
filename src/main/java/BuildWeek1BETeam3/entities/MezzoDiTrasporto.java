@@ -25,6 +25,9 @@ public abstract class MezzoDiTrasporto {
     private LocalDate dataInizioManutenzione;
     private LocalDate dataFineManutenzione;
 
+    @OneToMany(mappedBy = "mezzoditrasporto")
+    private List<TitoloDiViaggio> titolidiviaggio;
+
     @ManyToMany
     @JoinTable(
             name = "mezzoditrasporto_tratta",
@@ -52,7 +55,7 @@ public abstract class MezzoDiTrasporto {
         if (manutenzione.equals(StatoManutenzione.IN_MANUTENZIONE)) {
             this.dataInizioManutenzione = LocalDate.now();
         } else { this.dataFineManutenzione = LocalDate.now();
-    }}
+        }}
 
     public UUID getId() {
         return id;

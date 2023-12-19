@@ -1,10 +1,11 @@
 package BuildWeek1BETeam3.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo_prodotto")
 public abstract class PuntoDiEmissione {
     @Id
@@ -13,6 +14,10 @@ public abstract class PuntoDiEmissione {
 
     @Column(name = "Luogo")
     public String luogo;
+
+    @OneToMany(mappedBy = "puntodiemissione")
+    private List<TitoloDiViaggio> titoliDiViaggio;
+
 
     public PuntoDiEmissione() {
     }

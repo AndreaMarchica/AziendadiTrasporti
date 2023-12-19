@@ -12,6 +12,14 @@ public abstract class TitoloDiViaggio {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @ManyToOne
+    @JoinColumn(name = "puntodiemissione_id")
+    private PuntoDiEmissione puntodiemissione;
+
+    @ManyToOne
+    @JoinColumn(name = "mezzoditrasporto_id")
+    private MezzoDiTrasporto mezzoditrasporto;
+
     public TitoloDiViaggio(){}
 
     public UUID getUuid() {

@@ -6,9 +6,11 @@ import java.time.LocalDate;
 
 @Entity
 public class Biglietto extends TitoloDiViaggio{
-    private LocalDate emissione = LocalDate.now();
+    private LocalDate emissione;
 
-    public Biglietto (){}
+    public Biglietto (){
+        this.emissione = LocalDate.now();
+    }
 
     public LocalDate getEmissione() {
         return emissione;
