@@ -47,6 +47,7 @@ public class Application {
         Tratta Linea9 = new Tratta("Piazzale Gioberti", "largo Irneri", 30);
         Tratta Linea10 = new Tratta("Piazza Tommaseo", "Via Valmaura", 40);
 
+
 //        ****************************************SALVATAGGIO NEL DB DELLE TRATTE****************************
 
         td.save(Linea1);
@@ -104,14 +105,11 @@ public class Application {
             tvd.save(abbonamento);
         });
 
- //        ****************************************SALVATAGGIO NEL DB ****************************************
 
-
-        tvd.save(biglietto1);
-        tvd.save(biglietto2);
-        tvd.save(biglietto3);
-        tvd.save(biglietto4);
-        tvd.save(biglietto5);
+        tsd.getAll().forEach( tessera -> {
+            Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
+            tvd.save(abbonamento);
+        });
 
 
 
@@ -136,14 +134,14 @@ public class Application {
         ped.save(aRiv2);
         ped.save(aRiv3);
         ped.save(riv4);
-        ped.save(riv5);*/
-
-
-/*        tvd.save(aRiv1.stampaBiglietto());*/
+        ped.save(riv5);
+        tvd.save(aRiv1.stampaBiglietto());
 
 
         em.close();
         emf.close();
+
+        System.out.printf("**********************************************************************************");
         System.out.println("Hello Moto!");
     }
 }
