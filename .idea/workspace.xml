@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Stato.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StoricoManutenzione.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StoricoTratte.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/TipoManutenzione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Autobus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Autobus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StatoManutenzione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StatoMezzo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Biglietto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Biglietto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/MezzoDiTrasportoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/MezzoDiTrasportoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tratta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tratta.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,5 +81,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create start poject" />
     <option name="LAST_COMMIT_MESSAGE" value="create start poject" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tratta.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

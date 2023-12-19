@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class MezzoDiTrasportoDAO {
-    private final EntityManager em;
+    private static final EntityManager em;
 
     public MezzoDiTrasportoDAO(EntityManager em) {
         this.em = em;
@@ -60,7 +60,7 @@ public class MezzoDiTrasportoDAO {
         }
     }
 
-    public List<MezzoDiTrasporto> getAll(){
+    public static List<MezzoDiTrasporto> getAll(){
         TypedQuery<MezzoDiTrasporto> query = em.createQuery("SELECT m from MezzoDiTrasporto m", MezzoDiTrasporto.class);
         return query.getResultList();
     }
