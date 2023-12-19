@@ -32,7 +32,7 @@ public abstract class MezzoDiTrasporto {
     private List<Tratta> tratte = new ArrayList<>();
 
 @ManyToOne
-@JoinColumn(name="Mezzo_id")
+@JoinColumn(name="stato_manutenzione")
 private Stato stato;
 
 
