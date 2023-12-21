@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@NamedQueries(
+        @NamedQuery(
+                name = "Tratta.countPercorsiPerMezzo",
+                query = "SELECT COUNT(x) FROM Tratta x WHERE t.MezzoDiTrasporto.id = :mezzoId AND t.id = :trattaId"
+        )
+)
 public class Tratta {
 
     /*ATTRIBUTI*/
