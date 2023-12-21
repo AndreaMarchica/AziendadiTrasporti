@@ -83,9 +83,9 @@ public class Application {
 
         tsd.getAll().forEach(tessera -> {
             Random rndm = new Random();
-            int random = rndm.nextInt(0,2);
+            boolean random = rndm.nextBoolean();
 
-            if (random == 0) {
+            if (random) {
                 Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
                 tvd.save(abbonamento);
             } else {
@@ -119,7 +119,7 @@ public class Application {
         em.close();
         emf.close();
 
-        System.out.printf("**********************************************************************************");
+        System.out.println("**********************************************************************************");
         System.out.println("Hello Moto!");
 
 
