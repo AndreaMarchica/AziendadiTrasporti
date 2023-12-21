@@ -46,7 +46,7 @@ public abstract class PuntoDiEmissione {
         this.titoliDiViaggio = titoliDiViaggio;
     }
 
-    public Biglietto stampaBiglietto() {
+/*    public Biglietto stampaBiglietto() {
         if(!RivenditoreAutomatico.isIn_servizio()){
             System.out.println("Rivenditore fuori servizio!");
         } else {
@@ -55,7 +55,7 @@ public abstract class PuntoDiEmissione {
         return b;
     }
         return null;
-    }
+    }*/
     public Abbonamento stampaAbbonamento(Tessera tessera, VALIDITA validita) {
         return new Abbonamento();
     }

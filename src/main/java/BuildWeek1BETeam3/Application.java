@@ -41,54 +41,51 @@ public class Application {
         TesseraDAO tsd = new TesseraDAO(em);
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
-//
-////        ****************************************CREAZIONE DELLE TRATTE*********************************************
-//
-//
-        /*
-        for (int i = 0; i < 10; i++) {
-            Random rndm = new Random();
-            int tempo = rndm.nextInt(1, 150);
-            Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo);
-            td.save(t);
-        }
-//
-//
-////    ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-//
+
+
+//  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
+
         for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
-//
-//
-////   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
-//
+
+//   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
+
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int posti = rndm.nextInt(50, 100);
             Tram t = new Tram(posti, dateSupplier.get());
             mtd.save(t);
         }
-//
-//
-////        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
-//
+
+//        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
+
         for (int i = 0; i < 10; i++) {
             Autobus a = new Autobus(50, dateSupplier.get());
             mtd.save(a);
         }
-//
-//        //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
-//
+
+        //       ****************************************CREAZIONE DELLE TRATTE*********************************************
+
+
+        mtd.getAll().forEach(mezzo -> {
+            Random rndm = new Random();
+            int tempo = rndm.nextInt(1, 150);
+            Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo, mezzo);
+            td.save(t);
+        });
+
+
+//       **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
+
         ud.getAll().forEach(utente -> {
             Tessera tessera = new Tessera(utente);
             tsd.save(tessera);
         });
-//
-//        //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
-//
-//
+
+//          **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+
         tsd.getAll().forEach(tessera -> {
             Random rndm = new Random();
             boolean random = rndm.nextBoolean();
@@ -102,9 +99,9 @@ public class Application {
 
             }
         });
-//
-//
-//        //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+
+        //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+
         for (int i = 0; i < 10; i++) {
             Random rdm = new Random();
             int a = rdm.nextInt(0, 2);
@@ -118,23 +115,8 @@ public class Application {
             }
         }
 
-        RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
-        RivenditoreAutomatico aRiv2 = new RivenditoreAutomatico("Garbatella", false);
-        RivenditoreAutomatico aRiv3 = new RivenditoreAutomatico("Centocelle", true);
-        RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
-        RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
 
-        ped.save(aRiv1);
-        ped.save(riv5);
-        //           ****************************************SALVATAGGIO NEL DB ****************************************
-
-        tvd.save(ped.getById(UUID.fromString("08105258-0440-43fc-9a92-8e7587215e1d")).stampaBiglietto());
-
-
-
-
-
-        UUID tesseraId =UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
+        UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         if (tesseraDAO.isAbbonamentoValido(tesseraId) == null) {
             System.out.println("Tessera non è valida");
