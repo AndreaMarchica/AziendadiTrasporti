@@ -38,16 +38,13 @@ public class Application {
 
 //        ****************************************CREAZIONE DELLE TRATTE*********************************************
 
-        Tratta Linea1 = new Tratta("Piazza della Libertà", "via Svevo", 20);
-        Tratta Linea3 = new Tratta("Conconello", "Piazza della Libertà", 45);
-        Tratta Linea4 = new Tratta("Villa Carsia", "Piazza Oberdan", 30);
-        Tratta Linea5 = new Tratta("Piazza del Perugino", "Roiano", 30);
-        Tratta Linea6 = new Tratta("San Giovanni(Piazzale Gioberti)", "Grignano", 25);
-        Tratta Linea7 = new Tratta("Muggia", "Lazzaretto", 60);
-        Tratta Linea8 = new Tratta("Roiano", "Via Valmaura", 45);
-        Tratta Linea9 = new Tratta("Piazzale Gioberti", "largo Irneri", 30);
-        Tratta Linea10 = new Tratta("Piazza Tommaseo", "Via Valmaura", 40);
 
+        for (int i = 0; i < 10; i++) {
+            Random rndm = new Random();
+            int tempo = rndm.nextInt(1, 150);
+            Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo);
+            td.save(t);
+        }
 
 //        ****************************************SALVATAGGIO NEL DB DELLE TRATTE****************************
 
@@ -88,20 +85,15 @@ public class Application {
             mtd.save(a);
         }*/
 
- //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
+        //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
 
 /*        ud.getAll().forEach(utente -> {
             Tessera tessera = new Tessera(utente);
             tsd.save(tessera);
         });*/
 
- //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+        //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
 
-        Biglietto biglietto1 = new Biglietto();
-        Biglietto biglietto2 = new Biglietto();
-        Biglietto biglietto3 = new Biglietto();
-        Biglietto biglietto4 = new Biglietto();
-        Biglietto biglietto5 = new Biglietto();
 
 /*        tsd.getAll().forEach(tessera -> {
             Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
@@ -124,7 +116,8 @@ public class Application {
         }
 /*
         RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
-        RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");*/
+        RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
+        */
 
  //           ****************************************SALVATAGGIO NEL DB ****************************************
 
@@ -136,6 +129,8 @@ public class Application {
 
         System.out.printf("**********************************************************************************");
         System.out.println("Hello Moto!");
+
+
     }
 }
 
