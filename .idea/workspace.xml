@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/TesseraDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/TesseraDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tessera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tessera.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +77,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Larionov",
+    "git-widget-placeholder": "Merging Larionov",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "proofread"
   }
