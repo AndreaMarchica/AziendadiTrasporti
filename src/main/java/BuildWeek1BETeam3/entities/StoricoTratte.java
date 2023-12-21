@@ -11,6 +11,8 @@ public class StoricoTratte {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id_StoricoTratte;
 
+    private int tempoEffettivoPercorrenza;
+
     @OneToMany(mappedBy = "storicoTratte")
     private List<Tratta> storicoTratte = new ArrayList<>();
 
