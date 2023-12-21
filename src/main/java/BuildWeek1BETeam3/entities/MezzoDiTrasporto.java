@@ -73,6 +73,7 @@ private Stato stato;
 
 
 
+
     @Override
     public String toString() {
         return "MezzoDiTrasporto{" +

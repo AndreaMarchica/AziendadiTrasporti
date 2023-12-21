@@ -41,10 +41,10 @@ public class Application {
         TesseraDAO tsd = new TesseraDAO(em);
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
-
+        StoricoTratteDAO std = new StoricoTratteDAO(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-
+/*
         for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
@@ -75,6 +75,8 @@ public class Application {
             Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo, mezzo);
             td.save(t);
         });
+
+
 
 
 //       **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
@@ -123,7 +125,25 @@ public class Application {
         } else {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }
+        }*/
+
+//        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
+
+        // ricupero il mezzo dal db
+        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("30372eb3-d091-47fc-a9fa-af0b520e3dc0"));
+
+        //ricupero una tratta dal db
+
+        Tratta trattaUno = td.getById(UUID.fromString("03d799be-b3df-4a3f-9227-4fbbb5924ce5"));
+
+        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now(), 20,trattaUno, berlusconiBus);
+
+        std.save(trattaNunzio);
+
+
+
+
+
 
 
         em.close();
