@@ -61,6 +61,13 @@ public class TrattaDAO {
         }
     }
 
+    public Long contaPercorsi(UUID idMezzo, UUID trattaId){
+        TypedQuery<Long> query = em.createNamedQuery("TrattacountPercorsiPerMezzo", Long.class );
+        query.setParameter("trattaId", trattaId);
+        query.setParameter("mezzoId", idMezzo);
+        return  query.getSingleResult();
+    }
+
     public List<Tratta> getAll(){
         TypedQuery<Tratta> query = em.createQuery("SELECT t from Tratta t", Tratta.class);
         return query.getResultList();

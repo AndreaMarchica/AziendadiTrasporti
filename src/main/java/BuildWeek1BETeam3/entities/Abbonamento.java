@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@DiscriminatorValue("abbonamento")
 public class Abbonamento extends TitoloDiViaggio{
 
     @ManyToOne

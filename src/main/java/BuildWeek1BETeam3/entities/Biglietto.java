@@ -1,12 +1,10 @@
 package BuildWeek1BETeam3.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@DiscriminatorValue("biglietto")
 @NamedQueries(
         @NamedQuery(name = "Biglietto.findVidimatiByPeriodo",
         query = "SELECT x FROM Biglietto x WHERE x.vidimazione BETWEEN :startPeriod AND :endPeriod"
