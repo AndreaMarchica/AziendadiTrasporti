@@ -89,8 +89,17 @@ public class Application {
 //
 //
         tsd.getAll().forEach(tessera -> {
-            Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
-            tvd.save(abbonamento);
+            Random rndm = new Random();
+            boolean random = rndm.nextBoolean();
+
+            if (random) {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
+                tvd.save(abbonamento);
+            } else {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.SETTIMANALE);
+                tvd.save(abbonamento);
+
+            }
         });
 //
 //
@@ -121,8 +130,12 @@ public class Application {
         em.close();
         emf.close();
 
-        System.out.printf("**********************************************************************************");
+
+
+        System.out.println("**************************************");
         System.out.println("Hello Moto!");
+        System.out.println("**************************************");
+
 
 
     }
