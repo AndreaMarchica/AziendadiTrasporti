@@ -1,60 +1,104 @@
 package BuildWeek1BETeam3;
 
 import BuildWeek1BETeam3.entities.*;
-import BuildWeek1BETeam3.entities.DAO.MezzoDiTrasportoDAO;
+import BuildWeek1BETeam3.entities.DAO.*;
+import com.github.javafaker.Faker;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
-
+import java.util.function.Supplier;
 
 public class Application {
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
 
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendadiTrasporti");
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
-        try {
-            EntityManager entityManager= emf.createEntityManager();
-            LocalDate dataInizioPeriodo= LocalDate.now();
-            LocalDate dataFinePeriodo = LocalDate.now().plusDays(5);
-           entityManager
-                    .createNamedQuery("Biglietto.findVidimatiByPeriodo", Biglietto.class)
-                    .setParameter("inizioPeriod", dataInizioPeriodo)
-                    .setParameter("finePeriodo", dataFinePeriodo)
-                    .getResultList().forEach(System.out::println);
 
+        //test della query per trovare il numero di biglietti emessi da uno specifico punto di emissione in un certo lasso di tempo
+//        TitoloDiViaggioDAO dao = new TitoloDiViaggioDAO(em);
+//        System.out.println(dao.findNumberTitoliByPeriod(LocalDate.now().minusWeeks(1), LocalDate.now().plusDays(20), UUID.fromString("8b5d8eaf-06b8-46f5-98d1-0de88d3f9c9a")));
+
+
+        Faker faker = new Faker(Locale.ITALIAN);
+
+        Supplier<LocalDate> dateSupplier = () -> {
+            Random rdm = new Random();
+            int randomYear = rdm.nextInt(2000, 2024);
+            int randomDay = rdm.nextInt(1, 29);
+            int randomMonth = rdm.nextInt(1, 12);
+            return LocalDate.of(randomYear, randomMonth, randomDay);
+        };
+
+
+        TrattaDAO td = new TrattaDAO(em);
+        UtenteDAO ud = new UtenteDAO(em);
+        MezzoDiTrasportoDAO mtd = new MezzoDiTrasportoDAO(em);
+        TesseraDAO tsd = new TesseraDAO(em);
+        TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
+        PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
+//
+////        ****************************************CREAZIONE DELLE TRATTE*********************************************
+//
+//
+        for (int i = 0; i < 10; i++) {
+            Random rndm = new Random();
+            int tempo = rndm.nextInt(1, 150);
+            Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo);
+            td.save(t);
         }
-        catch(Exception err){
-            System.out.println(err);
+//
+//
+////    ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
+//
+        for (int i = 0; i < 10; i++) {
+            Utente u = new Utente(faker.name().name(), faker.name().lastName());
+            ud.save(u);
         }
-
-
-        try {
-            EntityManager entityManager= emf.createEntityManager();
-            Tram tram = new Tram();
-            UUID tramId= tram.getId();
-            Autobus autobus = new Autobus();
-            UUID autobusId= autobus.getId();
-            Tratta tratta= new Tratta();
-            UUID trattaId= tratta.getUuid();
-            entityManager
-                    .createNamedQuery("Tratta.countPercorsiPerMezzo", Tratta.class)
-                    .setParameter("trattaId", trattaId)
-                    .setParameter("tramId", tramId)
-                    .setParameter("autobusId", autobusId)
-                    .getResultList().forEach(System.out::println);
+//
+//
+////   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
+//
+        for (int i = 0; i < 10; i++) {
+            Random rndm = new Random();
+            int posti = rndm.nextInt(50, 100);
+            Tram t = new Tram(posti, dateSupplier.get());
+            mtd.save(t);
         }
-        catch(Exception err){
-            System.out.println(err);
+//
+//
+////        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
+//
+        for (int i = 0; i < 10; i++) {
+            Autobus a = new Autobus(50, dateSupplier.get());
+            mtd.save(a);
         }
+//
+//        //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
+//
+        ud.getAll().forEach(utente -> {
+            Tessera tessera = new Tessera(utente);
+            tsd.save(tessera);
+        });
+//
+//        //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+//
+//
+        tsd.getAll().forEach(tessera -> {
+            Random rndm = new Random();
+            boolean random = rndm.nextBoolean();
 
+            if (random) {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
+                tvd.save(abbonamento);
+            } else {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.SETTIMANALE);
+                tvd.save(abbonamento);
 
-<<<<<<< HEAD
-
-=======
             }
         });
 //
@@ -84,14 +128,10 @@ public class Application {
         //           ****************************************SALVATAGGIO NEL DB ****************************************
 
         tvd.save(ped.getById(UUID.fromString("08105258-0440-43fc-9a92-8e7587215e1d")).stampaBiglietto());
->>>>>>> Larionov
 
-        System.out.println("Hello World!");
 
         em.close();
         emf.close();
-<<<<<<< HEAD
-=======
 
 
         System.out.println("**************************************");
@@ -99,6 +139,6 @@ public class Application {
         System.out.println("**************************************");
 
 
->>>>>>> Larionov
     }
 }
+
