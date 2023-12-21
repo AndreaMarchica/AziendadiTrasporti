@@ -45,7 +45,7 @@ public class Application {
         StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-        for (int i = 0; i < 10; i++) {
+/*        for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
@@ -119,10 +119,10 @@ public class Application {
             if (b) {
                 tvd.save(raut.stampaBiglietto());
             }
-        }
+        }*/
 
 
- /*       UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
+        UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         if (tesseraDAO.isAbbonamentoValido(tesseraId) == null) {
             System.out.println("Tessera non è valida");
@@ -134,21 +134,32 @@ public class Application {
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1864bdf2-8000-4aa9-bdf6-b7a239d8195b"));
+        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("253ecd1b-5ef0-4b51-b237-90aecdb0bab5"));
 
 
         //ricupero una tratta dal db
 
-        Tratta trattaUno = td.getById(UUID.fromString("01837cf4-302a-4b5b-b4cd-ff44c362c852"));
+        Tratta trattaUno = td.getById(UUID.fromString("021ef7ba-9dfa-438d-ac81-b6a7fbaaa482"));
 
         StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
 
 //        std.save(trattaNunzio);
 
 
+//        **************************************CREAO UNO STATO DEL MEZZO***********************************
+
         Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(), TipoManutenzione.STRAORDINARIA, berlusconiBus);
         sd.save(manutenzione1);
-*/
+
+        //****************************ASSEGNO LO STATO AL MEZZO ESISTENTE PRESO DAL DATABASE**********
+
+        berlusconiBus.setStato(manutenzione1);
+
+//       ***************************AGGIORNO LO STATO DEL MEZZO*************************************
+
+        mtd.save(berlusconiBus);
+
+
 
         em.close();
         emf.close();

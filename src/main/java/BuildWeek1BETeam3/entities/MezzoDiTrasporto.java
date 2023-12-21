@@ -78,6 +78,10 @@ public abstract class MezzoDiTrasporto {
     }
 
 
+    public void setStato(Stato stato) {
+        this.stato = stato;
+    }
+
     @Override
     public String toString() {
         return "MezzoDiTrasporto{" +

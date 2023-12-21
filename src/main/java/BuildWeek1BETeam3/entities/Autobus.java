@@ -61,6 +61,11 @@ public class Autobus extends MezzoDiTrasporto {
     }
 
     @Override
+    public void setStato(Stato stato) {
+        super.setStato(stato);
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
