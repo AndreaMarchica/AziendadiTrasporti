@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@NamedQuery(
+        name = "abbonamentiValidi",
+        query = "SELECT a FROM Tessera t JOIN t.abbonamenti a " +
+                "WHERE t.id = :tesseraId AND a.scadenza > CURRENT_DATE"
+)
 public class Tessera {
 
     @Id
@@ -76,7 +81,7 @@ public class Tessera {
         }
     public void rinnovo() {
         if (!isTesseraValida()) {
-            LocalDate nuovaScadenza = LocalDate.now().plusYears(1);
+              LocalDate nuovaScadenza = LocalDate.now().plusYears(1);
             this.data_scadenza = nuovaScadenza;
             System.out.println("Tessera rinnovata, nuova scadenza: " + nuovaScadenza);
         } else {
