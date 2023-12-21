@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-//@NamedQuery(name = "Tessera.isAbbonamentoValidoById", query = "SELECT t.isAbbonamentoValido FROM Tessera t WHERE t.id_tessera = :idTessera")
 public class Tessera {
 
     @Id
@@ -66,17 +65,6 @@ public class Tessera {
     }
 
 
-    //verifica se l'abbonamento è valido
-    public boolean isAbbonamentoValido() {
-        LocalDate oggi = LocalDate.now();
-        for (Abbonamento abbonamento : abbonamenti) {
-            if (abbonamento.getScadenza().isAfter(oggi)) {
-                return true;
-                //almeno 1  abbonamento valido
-            }
-        }
-        return false;
-    }
     //rinnovo() tessera
     public boolean isTesseraValida() {
         LocalDate oggi = LocalDate.now();
@@ -107,4 +95,31 @@ public class Tessera {
         return rivenditore;
     }
 
+    public void setId_tessera(UUID id_tessera) {
+        this.id_tessera = id_tessera;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    public void setData_emissione(LocalDate data_emissione) {
+        this.data_emissione = data_emissione;
+    }
+
+    public void setData_scadenza(LocalDate data_scadenza) {
+        this.data_scadenza = data_scadenza;
+    }
+
+    public List<Abbonamento> getAbbonamenti() {
+        return abbonamenti;
+    }
+
+    public void setAbbonamenti(List<Abbonamento> abbonamenti) {
+        this.abbonamenti = abbonamenti;
+    }
+
+    public void setRivenditore(RivenditoreAutorizzato rivenditore) {
+        this.rivenditore = rivenditore;
+    }
 }

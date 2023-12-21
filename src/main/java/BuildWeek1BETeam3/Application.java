@@ -18,6 +18,12 @@ public class Application {
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
+
+        //test della query per trovare il numero di biglietti emessi da uno specifico punto di emissione in un certo lasso di tempo
+//        TitoloDiViaggioDAO dao = new TitoloDiViaggioDAO(em);
+//        System.out.println(dao.findNumberTitoliByPeriod(LocalDate.now().minusWeeks(1), LocalDate.now().plusDays(20), UUID.fromString("8b5d8eaf-06b8-46f5-98d1-0de88d3f9c9a")));
+
+
         Faker faker = new Faker(Locale.ITALIAN);
 
         Supplier<LocalDate> dateSupplier = () -> {
@@ -35,86 +41,85 @@ public class Application {
         TesseraDAO tsd = new TesseraDAO(em);
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
-
-//        ****************************************CREAZIONE DELLE TRATTE*********************************************
-
-
+//
+////        ****************************************CREAZIONE DELLE TRATTE*********************************************
+//
+//
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int tempo = rndm.nextInt(1, 150);
             Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo);
             td.save(t);
         }
-
-//        ****************************************SALVATAGGIO NEL DB DELLE TRATTE****************************
-
-/*        td.save(Linea1);
-        td.save(Linea3);
-        td.save(Linea4);
-        td.save(Linea5);
-        td.save(Linea6);
-        td.save(Linea7);
-        td.save(Linea8);
-        td.save(Linea9);
-        td.save(Linea10);*/
-
-//    ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-
-/*        for (int i = 0; i < 10; i++) {
+//
+//
+////    ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
+//
+        for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
-        }*/
-
-
-//   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
-
-/*
+        }
+//
+//
+////   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
+//
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int posti = rndm.nextInt(50, 100);
             Tram t = new Tram(posti, dateSupplier.get());
             mtd.save(t);
         }
-*/
-
-
-//        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
-
-/*        for (int i = 0; i < 10; i++) {
+//
+//
+////        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
+//
+        for (int i = 0; i < 10; i++) {
             Autobus a = new Autobus(50, dateSupplier.get());
             mtd.save(a);
-        }*/
-
-        //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
-
-/*        ud.getAll().forEach(utente -> {
+        }
+//
+//        //      **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
+//
+        ud.getAll().forEach(utente -> {
             Tessera tessera = new Tessera(utente);
             tsd.save(tessera);
-        });*/
+        });
+//
+//        //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+//
+//
+        tsd.getAll().forEach(tessera -> {
+            Random rndm = new Random();
+            boolean random = rndm.nextBoolean();
 
-        //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+            if (random) {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
+                tvd.save(abbonamento);
+            } else {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.SETTIMANALE);
+                tvd.save(abbonamento);
 
-
-/*        tsd.getAll().forEach(tessera -> {
-            Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
-            tvd.save(abbonamento);
-        });*/
-
-
- //    **************************************** CREAZIONE DEI PUNTI DI EMISSIONE *******************************
-/*        for (int i = 0; i < 10; i++) {
+            }
+        });
+//
+//
+//        //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
+//        for (int i = 0; i < 10; i++) {
             Random rdm = new Random();
             int a = rdm.nextInt(0, 2);
             boolean b;
             b = a == 1;
             RivenditoreAutomatico raut = new RivenditoreAutomatico(faker.address().streetAddress(), b);
             ped.save(raut);
-        }*/
-        for (int i = 0; i < 10; i++) {
-            RivenditoreAutorizzato raut = new RivenditoreAutorizzato(faker.address().streetAddress());
-            ped.save(raut);
-        }
-/*
+            //salvo nel database il biglietto ritornato dalla funzione 'stampaBiglietto()'
+            if(b){
+                tvd.save(raut.stampaBiglietto());
+            }
+//        }
+        /*
+        RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
+        RivenditoreAutomatico aRiv2 = new RivenditoreAutomatico("Garbatella", false);
+        RivenditoreAutomatico aRiv3 = new RivenditoreAutomatico("Centocelle", true);
         RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
         RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
         */
@@ -127,8 +132,12 @@ public class Application {
         em.close();
         emf.close();
 
-        System.out.printf("**********************************************************************************");
+
+
+        System.out.println("**************************************");
         System.out.println("Hello Moto!");
+        System.out.println("**************************************");
+
 
 
     }

@@ -1,8 +1,10 @@
 package BuildWeek1BETeam3.entities.DAO;
 
+import BuildWeek1BETeam3.entities.PuntoDiEmissione;
 import BuildWeek1BETeam3.entities.TitoloDiViaggio;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,6 +62,14 @@ public class TitoloDiViaggioDAO {
     public List<TitoloDiViaggio> getAll(){
         TypedQuery<TitoloDiViaggio> query = em.createQuery("SELECT t from TitoloDiViaggio t", TitoloDiViaggio.class);
         return query.getResultList();
+    }
+
+    public Long findNumberTitoliByPeriod(LocalDate startDate, LocalDate endDate, UUID puntoDiEmissioneID){
+        TypedQuery<Long> query = em.createNamedQuery("findNumberTitoliByPeriod", Long.class);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        query.setParameter("puntodiemissione", puntoDiEmissioneID);
+        return query.getSingleResult();
     }
 
 }
