@@ -7,11 +7,6 @@
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Autobus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Autobus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Stato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Stato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StoricoManutenzione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StoricoManutenzione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tram.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +35,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="Larionov" />
-                    <option name="lastUsedInstant" value="1703182574" />
+                    <option name="lastUsedInstant" value="1703199634" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1703176162" />
+                    <option name="lastUsedInstant" value="1703199618" />
                   </RecentBranch>
                 </list>
               </option>

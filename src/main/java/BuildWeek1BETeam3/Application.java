@@ -52,12 +52,13 @@ public class Application {
 
 //   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
         Stato stato = new Stato(StatoMezzo.IN_SERVIZIO);
+        sd.save(stato);
+
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int posti = rndm.nextInt(50, 100);
             Tram t = new Tram(posti, dateSupplier.get(), stato);
             stato.aggiungiMezzo(t);
-            sd.save(stato);
             mtd.save(t);
         }
 
