@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
-      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/StoricoTratteDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/StatoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/TrattaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/TrattaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/MezzoDiTrasporto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Stato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Stato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StoricoTratte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/StoricoTratte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tratta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/Tratta.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +37,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1703176162" />
+                    <option name="branchName" value="Larionov" />
+                    <option name="lastUsedInstant" value="1703182574" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="Larionov" />
-                    <option name="lastUsedInstant" value="1703176161" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1703176162" />
                   </RecentBranch>
                 </list>
               </option>
@@ -75,7 +73,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Larionov",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "preferences.keymap"
   }

@@ -11,11 +11,11 @@ public class Stato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private StatoMezzo stato;
     private LocalDate inizioManutenzione;
     private LocalDate fineManutenzione;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private TipoManutenzione tipoManutenzione;
 
     @OneToMany(mappedBy = "stato")
@@ -23,7 +23,14 @@ public class Stato {
 
     @ManyToOne
     @JoinColumn(name="storicoManutenzioni")
-private StoricoManutenzione storicoManutenzioni;
+    private StoricoManutenzione storicoManutenzioni;
+
+    public Stato(StatoMezzo stato, LocalDate inizioManutenzione, TipoManutenzione tipoManutenzione, MezzoDiTrasporto mezzo) {
+        this.stato = stato;
+        this.inizioManutenzione = inizioManutenzione;
+        this.tipoManutenzione = tipoManutenzione;
+        listaMezzi.add(mezzo);
+    }
 
     public StatoMezzo getStato() {
         return stato;

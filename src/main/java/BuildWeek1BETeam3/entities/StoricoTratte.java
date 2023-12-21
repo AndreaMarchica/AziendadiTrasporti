@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +16,8 @@ public class StoricoTratte {
     private LocalDate dataPercorrenza;
 
     private int numeroVoltePercorse;
+
+    private int tempoEffettivoDiPercorrenza;
 
     @ManyToOne
     @JoinColumn(name = "tratta_id")
@@ -32,6 +35,9 @@ public class StoricoTratte {
         this.numeroVoltePercorse = numeroVoltePercorse;
         this.tratta = tratta;
         this.mezzo = mezzo;
+        Random rndm = new Random();
+        int traffico = rndm.nextInt(-7, 40);
+        this.tempoEffettivoDiPercorrenza = tratta.getTempoMedioPercorrenza() + traffico;
     }
 
     public UUID getId_StoricoTratte() {

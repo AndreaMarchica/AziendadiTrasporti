@@ -42,10 +42,10 @@ public class Application {
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
         StoricoTratteDAO std = new StoricoTratteDAO(em);
+        StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-/*
-        for (int i = 0; i < 10; i++) {
+/*        for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
@@ -130,19 +130,21 @@ public class Application {
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("30372eb3-d091-47fc-a9fa-af0b520e3dc0"));
+        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("01404bb3-5f6a-4bbe-9d10-9c55ac75002a"));
+
 
         //ricupero una tratta dal db
 
-        Tratta trattaUno = td.getById(UUID.fromString("03d799be-b3df-4a3f-9227-4fbbb5924ce5"));
+        Tratta trattaUno = td.getById(UUID.fromString("02b741ff-0c35-49c5-85b2-10aeec787842"));
 
-        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now(), 20,trattaUno, berlusconiBus);
+        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10,trattaUno, berlusconiBus);
 
-        std.save(trattaNunzio);
-
-
+//        std.save(trattaNunzio);
 
 
+
+        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(),TipoManutenzione.STRAORDINARIA, berlusconiBus);
+        sd.save(manutenzione1);
 
 
 
