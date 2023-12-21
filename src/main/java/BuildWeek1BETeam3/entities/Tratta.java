@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@NamedQueries(
+/*@NamedQueries(
         @NamedQuery(
                 name = "TrattacountPercorsiPerMezzo",
                 query = "SELECT COUNT(x) FROM Mezzi x WHERE t.Tratta.id = :trattaId AND t.id = :mezzoId"
         )
-)
+)*/
 
 public class Tratta {
 
@@ -48,7 +48,8 @@ public class Tratta {
         this.zonaDiPartenza = zonaDiPartenza;
         this.capolinea = capolinea;
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
-//        this.mezzi = mezzi.add(mezzoDiTrasporto);
+        mezzi.add(mezzoDiTrasporto);
+
 
     }
 
@@ -92,6 +93,10 @@ public class Tratta {
 
     public void setTempoMedioPercorrenza(int tempoMedioPercorrenza) {
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
+    }
+
+    public void assegnaMezzoAdUnaTratta ( MezzoDiTrasporto mezzo){
+        mezzi.add(mezzo);
     }
 
 
