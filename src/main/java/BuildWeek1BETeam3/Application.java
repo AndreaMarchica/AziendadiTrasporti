@@ -104,26 +104,27 @@ public class Application {
 //
 //
 //        //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
-//        for (int i = 0; i < 10; i++) {
-        Random rdm = new Random();
-        int a = rdm.nextInt(0, 2);
-        boolean b;
-        b = a == 1;
-        RivenditoreAutomatico raut = new RivenditoreAutomatico(faker.address().streetAddress(), b);
-        ped.save(raut);
-        //salvo nel database il biglietto ritornato dalla funzione 'stampaBiglietto()'
-        if (b) {
-            tvd.save(raut.stampaBiglietto());
+        for (int i = 0; i < 10; i++) {
+            Random rdm = new Random();
+            int a = rdm.nextInt(0, 2);
+            boolean b;
+            b = a == 1;
+            RivenditoreAutomatico raut = new RivenditoreAutomatico(faker.address().streetAddress(), b);
+            ped.save(raut);
+            //salvo nel database il biglietto ritornato dalla funzione 'stampaBiglietto()'
+            if (b) {
+                tvd.save(raut.stampaBiglietto());
+            }
         }
-//        }
-        /*
+
         RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
         RivenditoreAutomatico aRiv2 = new RivenditoreAutomatico("Garbatella", false);
         RivenditoreAutomatico aRiv3 = new RivenditoreAutomatico("Centocelle", true);
         RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
         RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
-        */
 
+        ped.save(aRiv1);
+        ped.save(riv5);
         //           ****************************************SALVATAGGIO NEL DB ****************************************
 
         tvd.save(ped.getById(UUID.fromString("08105258-0440-43fc-9a92-8e7587215e1d")).stampaBiglietto());
