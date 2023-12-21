@@ -6,6 +6,7 @@ import BuildWeek1BETeam3.entities.TitoloDiViaggio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.List;
@@ -67,28 +68,15 @@ public class TesseraDAO {
         }
     }
 
-    public boolean isAbbonamentoValido(UUID idTessera) {
+    public Abbonamento isAbbonamentoValido(UUID tesseraId) {
         try {
-            Tessera tessera = getById(idTessera);
-            if (tessera != null) {
-                return checkAbbonamentoValidity(tessera);
-            }
-            return false;
-        } catch (Exception e) {
-            return false;
+        TypedQuery<Abbonamento> query = em.createNamedQuery("abbonamentiValidi", Abbonamento.class);
+        query.setParameter("tesseraId", tesseraId);
+        return query.getSingleResult();}
+        catch (NoResultException noResultException) {
+            return null;
         }
     }
-    private boolean checkAbbonamentoValidity(Tessera tessera) {
-        LocalDate oggi = LocalDate.now();
-        for (Abbonamento abbonamento : tessera.getAbbonamenti()) {
-            if (abbonamento.getScadenza().isAfter(oggi)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 
 
 }

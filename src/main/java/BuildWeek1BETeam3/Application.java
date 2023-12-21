@@ -46,6 +46,7 @@ public class Application {
 ////        ****************************************CREAZIONE DELLE TRATTE*********************************************
 //
 //
+        /*
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int tempo = rndm.nextInt(1, 150);
@@ -105,7 +106,7 @@ public class Application {
 //
 //
 //        //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
-//        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             Random rdm = new Random();
             int a = rdm.nextInt(0, 2);
             boolean b;
@@ -113,32 +114,44 @@ public class Application {
             RivenditoreAutomatico raut = new RivenditoreAutomatico(faker.address().streetAddress(), b);
             ped.save(raut);
             //salvo nel database il biglietto ritornato dalla funzione 'stampaBiglietto()'
-            if(b){
+            if (b) {
                 tvd.save(raut.stampaBiglietto());
             }
-//        }
-        /*
+        }
+
         RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
         RivenditoreAutomatico aRiv2 = new RivenditoreAutomatico("Garbatella", false);
         RivenditoreAutomatico aRiv3 = new RivenditoreAutomatico("Centocelle", true);
         RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
         RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
-        */
 
- //           ****************************************SALVATAGGIO NEL DB ****************************************
+        ped.save(aRiv1);
+        ped.save(riv5);
+        //           ****************************************SALVATAGGIO NEL DB ****************************************
 
         tvd.save(ped.getById(UUID.fromString("08105258-0440-43fc-9a92-8e7587215e1d")).stampaBiglietto());
+
+
+
+
+
+        UUID tesseraId =UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
+        TesseraDAO tesseraDAO = new TesseraDAO(em);
+        if (tesseraDAO.isAbbonamentoValido(tesseraId) == null) {
+            System.out.println("Tessera non è valida");
+        } else {
+            System.out.println("Tessera valida");
+            System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
+        }
 
 
         em.close();
         emf.close();
 
 
-
         System.out.println("**************************************");
         System.out.println("Hello Moto!");
         System.out.println("**************************************");
-
 
 
     }
