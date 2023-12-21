@@ -8,8 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class Application {
@@ -37,7 +39,7 @@ public class Application {
 
 //        ****************************************CREAZIONE DELLE TRATTE*********************************************
 
-
+/*
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int tempo = rndm.nextInt(1, 150);
@@ -78,6 +80,7 @@ public class Application {
             tsd.save(tessera);
         });
 
+
         //       **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
 
 
@@ -105,22 +108,41 @@ public class Application {
             RivenditoreAutomatico raut = new RivenditoreAutomatico(faker.address().streetAddress(), b);
             ped.save(raut);
         }
-        /*
+
         RivenditoreAutomatico aRiv1 = new RivenditoreAutomatico("EUR", true);
         RivenditoreAutomatico aRiv2 = new RivenditoreAutomatico("Garbatella", false);
         RivenditoreAutomatico aRiv3 = new RivenditoreAutomatico("Centocelle", true);
         RivenditoreAutorizzato riv4 = new RivenditoreAutorizzato("Trastevere");
         RivenditoreAutorizzato riv5 = new RivenditoreAutorizzato("Palatino");
-        */
+
 
         //           ****************************************SALVATAGGIO NEL DB ****************************************
 
+*/
+
+
+
+        // *******************************QUERY***************************************************
+
+
+        TesseraDAO tesseraDAO = new TesseraDAO(em);
+        UUID tesseraIdToCheck = UUID.fromString("e8d4d416-2da8-4dc4-b419-03d03893054e");
+        boolean isAbbonamentoValid = tesseraDAO.isAbbonamentoValido(tesseraIdToCheck);
+        if (isAbbonamentoValid) {
+            System.out.printf("**************************************");
+            System.out.printf("Abbonamento valido.");
+            System.out.println("**************************************");
+        } else {
+            System.out.println("Non è stato trovato un abbonamento valido.");
+        }
 
         em.close();
         emf.close();
 
-        System.out.println("**********************************************************************************");
-        System.out.println("Hello Moto!");
+
+        System.out.printf("**************************************");
+        System.out.printf("Hello Moto!");
+        System.out.println("**************************************");
 
 
     }
