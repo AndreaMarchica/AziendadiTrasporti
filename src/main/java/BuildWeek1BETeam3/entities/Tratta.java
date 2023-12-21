@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@NamedQueries(
+/*@NamedQueries(
         @NamedQuery(
-                name = "Tratta.countPercorsiPerMezzo",
-                query = "SELECT COUNT(x) FROM Tratta x WHERE t.MezzoDiTrasporto.id = :mezzoId AND t.id = :trattaId"
+                name = "TrattacountPercorsiPerMezzo",
+                query = "SELECT COUNT(x) FROM Mezzi x WHERE t.Tratta.id = :trattaId AND t.id = :mezzoId"
         )
-)
+)*/
+
 public class Tratta {
 
     /*ATTRIBUTI*/
@@ -32,7 +33,7 @@ public class Tratta {
     private List<MezzoDiTrasporto> mezzi = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name="storico_tratte")
+    @JoinColumn(name = "storico_tratte")
     private StoricoTratte storicoTratte;
 
 
@@ -42,15 +43,17 @@ public class Tratta {
     public Tratta() {
     }
 
-    public Tratta( String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza, MezzoDiTrasporto mezzoDiTrasporto) {
+    public Tratta(String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza, MezzoDiTrasporto mezzoDiTrasporto) {
 
         this.zonaDiPartenza = zonaDiPartenza;
         this.capolinea = capolinea;
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
+        mezzi.add(mezzoDiTrasporto);
+
 
     }
 
-    public Tratta( String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza) {
+    public Tratta(String zonaDiPartenza, String capolinea, int tempoMedioPercorrenza) {
 
         this.zonaDiPartenza = zonaDiPartenza;
         this.capolinea = capolinea;
@@ -92,6 +95,10 @@ public class Tratta {
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
     }
 
+    public void assegnaMezzoAdUnaTratta ( MezzoDiTrasporto mezzo){
+        mezzi.add(mezzo);
+    }
+
 
     @Override
     public String toString() {
@@ -100,7 +107,7 @@ public class Tratta {
                 ", zonaDiPartenza='" + zonaDiPartenza + '\'' +
                 ", capolinea='" + capolinea + '\'' +
                 ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
-                ", mezzoDiTrasporto="  +
+                ", mezzoDiTrasporto=" +
                 '}';
     }
 }

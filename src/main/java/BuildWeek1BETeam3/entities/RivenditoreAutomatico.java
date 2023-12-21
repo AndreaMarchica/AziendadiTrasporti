@@ -10,7 +10,7 @@ import java.util.List;
 public class RivenditoreAutomatico extends PuntoDiEmissione{
 
     @Column(name = "in_servizio", nullable = false)
-    private static boolean in_servizio;
+    private boolean in_servizio;
 
 
     public RivenditoreAutomatico(Boolean _in_servizio) {
@@ -23,7 +23,7 @@ public class RivenditoreAutomatico extends PuntoDiEmissione{
         in_servizio = _in_servizio;
     }
 
-    public static boolean isIn_servizio() {
+    public boolean isIn_servizio() {
         return in_servizio;
     }
 
