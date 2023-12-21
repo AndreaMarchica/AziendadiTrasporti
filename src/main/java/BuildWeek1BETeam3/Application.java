@@ -82,8 +82,17 @@ public class Application {
 
 
         tsd.getAll().forEach(tessera -> {
-            Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
-            tvd.save(abbonamento);
+            Random rndm = new Random();
+            int random = rndm.nextInt(0,2);
+
+            if (random == 0) {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.MENSILE);
+                tvd.save(abbonamento);
+            } else {
+                Abbonamento abbonamento = new Abbonamento(tessera, VALIDITA.SETTIMANALE);
+                tvd.save(abbonamento);
+
+            }
         });
 
 
