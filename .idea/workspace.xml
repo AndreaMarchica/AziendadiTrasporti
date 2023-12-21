@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aeabdd1-1413-4aa0-a073-221d4984101b" name="Changes" comment="create start poject">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/TitoloDiViaggioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/DAO/TitoloDiViaggioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/RivenditoreAutomatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/RivenditoreAutomatico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/TitoloDiViaggio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BuildWeek1BETeam3/entities/TitoloDiViaggio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +29,29 @@
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="fabioDAO" />
+                    <option name="lastUsedInstant" value="1703029222" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1703029221" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -54,7 +81,7 @@
   <component name="RunManager">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BuildWeek1BETeam3.Application" />
-      <module name="AziendaDiTrasporti" />
+      <module name="AziendadiTrasporti" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="BuildWeek1BETeam3.*" />
@@ -97,6 +124,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create start poject" />
