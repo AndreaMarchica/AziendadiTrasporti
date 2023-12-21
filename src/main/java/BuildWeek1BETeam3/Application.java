@@ -127,7 +127,7 @@ public class Application {
         ped.save(aRiv1);
         ped.save(riv5);
         //           ****************************************SALVATAGGIO NEL DB ****************************************
-
+ */
         tvd.save(ped.getById(UUID.fromString("08105258-0440-43fc-9a92-8e7587215e1d")).stampaBiglietto());
 
 
@@ -155,4 +155,3 @@ public class Application {
 
     }
 }
-
