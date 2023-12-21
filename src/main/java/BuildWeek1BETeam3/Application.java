@@ -45,24 +45,29 @@ public class Application {
         StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-/*        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
 
 //   **************************************** CREAZIONE E SALVATAGGIO DEI TRAM ****************************************
-
+        Stato stato = new Stato(StatoMezzo.IN_SERVIZIO);
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int posti = rndm.nextInt(50, 100);
-            Tram t = new Tram(posti, dateSupplier.get());
+            Tram t = new Tram(posti, dateSupplier.get(), stato);
+            stato.aggiungiMezzo(t);
+            sd.save(stato);
             mtd.save(t);
         }
+
 
 //        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
 
         for (int i = 0; i < 10; i++) {
-            Autobus a = new Autobus(50, dateSupplier.get());
+            Random rndm = new Random();
+            int posti = rndm.nextInt(50, 100);
+            Autobus a = new Autobus(posti, dateSupplier.get(), stato);
             mtd.save(a);
         }
 
@@ -75,8 +80,6 @@ public class Application {
             Tratta t = new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), tempo, mezzo);
             td.save(t);
         });
-
-
 
 
 //       **************************************** CREAZIONE E SALVATAGGIO DELLE TESSERE *******************************
@@ -118,35 +121,33 @@ public class Application {
         }
 
 
-        UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
+ /*       UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         if (tesseraDAO.isAbbonamentoValido(tesseraId) == null) {
             System.out.println("Tessera non è valida");
         } else {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }*/
+        }
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("01404bb3-5f6a-4bbe-9d10-9c55ac75002a"));
+        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1864bdf2-8000-4aa9-bdf6-b7a239d8195b"));
 
 
         //ricupero una tratta dal db
 
-        Tratta trattaUno = td.getById(UUID.fromString("02b741ff-0c35-49c5-85b2-10aeec787842"));
+        Tratta trattaUno = td.getById(UUID.fromString("01837cf4-302a-4b5b-b4cd-ff44c362c852"));
 
-        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10,trattaUno, berlusconiBus);
+        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
 
 //        std.save(trattaNunzio);
 
 
-
-        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(),TipoManutenzione.STRAORDINARIA, berlusconiBus);
+        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(), TipoManutenzione.STRAORDINARIA, berlusconiBus);
         sd.save(manutenzione1);
-
-
+*/
 
         em.close();
         emf.close();

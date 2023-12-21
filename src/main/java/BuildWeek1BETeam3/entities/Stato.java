@@ -25,6 +25,8 @@ public class Stato {
     @JoinColumn(name="storicoManutenzioni")
     private StoricoManutenzione storicoManutenzioni;
 
+
+    public Stato() {}
     public Stato(StatoMezzo stato, LocalDate inizioManutenzione, TipoManutenzione tipoManutenzione, MezzoDiTrasporto mezzo) {
         this.stato = stato;
         this.inizioManutenzione = inizioManutenzione;
@@ -64,16 +66,37 @@ public class Stato {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void aggiungiMezzo(MezzoDiTrasporto mezzo) {
+        this.listaMezzi.add(mezzo);
     }
 
-    public Stato(List<MezzoDiTrasporto> listaMezzi) {
-        this.listaMezzi=listaMezzi;
+    public void rimuoviMezzo(MezzoDiTrasporto mezzo) {
+        this.listaMezzi.remove(mezzo);
     }
-    public void setState(StatoMezzo stato){
-        this.stato=stato;
-        if (stato.equals(StatoMezzo.IN_MANUTENZIONE)){this.inizioManutenzione=LocalDate.now();}}
 
+    public Stato(StatoMezzo statoMezzo) {
+        this.stato = statoMezzo;
+    }
+    public void setState(StatoMezzo stato) {
+        this.stato = stato;
+        if (stato.equals(StatoMezzo.IN_MANUTENZIONE)) {
+            this.inizioManutenzione = LocalDate.now();
+        } else {
+            this.inizioManutenzione = null;
+            this.fineManutenzione = null;
+        }
+    }
 
+    @Override
+    public String toString() {
+        return "Stato{" +
+                "id=" + id +
+                ", stato=" + stato +
+                ", inizioManutenzione=" + inizioManutenzione +
+                ", fineManutenzione=" + fineManutenzione +
+                ", tipoManutenzione=" + tipoManutenzione +
+                ", listaMezzi=" + listaMezzi +
+                ", storicoManutenzioni=" + storicoManutenzioni +
+                '}';
+    }
 }

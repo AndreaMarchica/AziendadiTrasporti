@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,11 +16,24 @@ public class Autobus extends MezzoDiTrasporto {
     public Autobus() {
     }
 
-    public Autobus(int capienza, LocalDate dataPrimoImpiego) {
-        super(capienza, dataPrimoImpiego);
+    public Autobus(int capienza, LocalDate dataPrimoImpiego, Stato statoDiManutenzione) {
+        super(capienza, dataPrimoImpiego, statoDiManutenzione);
     }
 
-    /*METODI*/
+    @Override
+    public List<Tratta> getTratte() {
+        return super.getTratte();
+    }
+
+    @Override
+    public void aggiungiTratta(Tratta tratta) {
+        super.aggiungiTratta(tratta);
+    }
+
+    @Override
+    public void rimuoviTratta(Tratta tratta) {
+        super.rimuoviTratta(tratta);
+    }
 
     @Override
     public UUID getId() {
@@ -45,7 +59,6 @@ public class Autobus extends MezzoDiTrasporto {
     public void setDataPrimoImpiego(LocalDate dataPrimoImpiego) {
         super.setDataPrimoImpiego(dataPrimoImpiego);
     }
-
 
     @Override
     public String toString() {
