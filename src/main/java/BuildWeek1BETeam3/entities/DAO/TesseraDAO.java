@@ -1,11 +1,13 @@
 package BuildWeek1BETeam3.entities.DAO;
 
+import BuildWeek1BETeam3.entities.Abbonamento;
 import BuildWeek1BETeam3.entities.Tessera;
 import BuildWeek1BETeam3.entities.TitoloDiViaggio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,4 +66,29 @@ public class TesseraDAO {
             System.out.println("tessera non trovata, sicuro che l'id sia corretto?");
         }
     }
+
+    public boolean isAbbonamentoValido(UUID idTessera) {
+        try {
+            Tessera tessera = getById(idTessera);
+            if (tessera != null) {
+                return checkAbbonamentoValidity(tessera);
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    private boolean checkAbbonamentoValidity(Tessera tessera) {
+        LocalDate oggi = LocalDate.now();
+        for (Abbonamento abbonamento : tessera.getAbbonamenti()) {
+            if (abbonamento.getScadenza().isAfter(oggi)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
 }

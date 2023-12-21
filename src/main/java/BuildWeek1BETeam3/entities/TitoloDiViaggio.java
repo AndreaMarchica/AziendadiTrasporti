@@ -3,10 +3,14 @@ package BuildWeek1BETeam3.entities;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "findNumberTitoliByPeriod", query = "SELECT COUNT(t) FROM TitoloDiViaggio t " +
+        "WHERE t.emissione BETWEEN :startDate AND :endDate " +
+        "AND t.puntodiemissione.codice_ID = :puntodiemissione")
 public abstract class TitoloDiViaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,5 +35,22 @@ public abstract class TitoloDiViaggio {
         return "TitoloDiViaggio{" +
                 "uuid=" + uuid +
                 '}';
+    }
+
+
+    public PuntoDiEmissione getPuntodiemissione() {
+        return puntodiemissione;
+    }
+
+    public void setPuntodiemissione(PuntoDiEmissione puntodiemissione) {
+        this.puntodiemissione = puntodiemissione;
+    }
+
+    public MezzoDiTrasporto getMezzoditrasporto() {
+        return mezzoditrasporto;
+    }
+
+    public void setMezzoditrasporto(MezzoDiTrasporto mezzoditrasporto) {
+        this.mezzoditrasporto = mezzoditrasporto;
     }
 }
