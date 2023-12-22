@@ -8,13 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
+    private static final Map<String, String> users = new HashMap<>();
+    private static final Map<String, Boolean> isAdmin = new HashMap<>();
+    private static boolean logged = false;
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
@@ -45,7 +46,7 @@ public class Application {
         StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-/*        for (int i = 0; i < 10; i++) {
+  /*      for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
@@ -119,7 +120,7 @@ public class Application {
             if (b) {
                 tvd.save(raut.stampaBiglietto());
             }
-        }*/
+        }
 
 
         UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
@@ -129,17 +130,17 @@ public class Application {
         } else {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }
+        }*/
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("253ecd1b-5ef0-4b51-b237-90aecdb0bab5"));
+       /* MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
 
 
         //ricupero una tratta dal db
 
-        Tratta trattaUno = td.getById(UUID.fromString("021ef7ba-9dfa-438d-ac81-b6a7fbaaa482"));
+        Tratta trattaUno = td.getById(UUID.fromString("1d345322-3f7f-4112-ba42-d309dc853c68"));
 
         StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
 
@@ -157,8 +158,9 @@ public class Application {
 
 //       ***************************AGGIORNO LO STATO DEL MEZZO*************************************
 
-        mtd.save(berlusconiBus);
+        mtd.save(berlusconiBus);*/
 
+        handleUserLoginAndRegister();
 
 
         em.close();
@@ -170,6 +172,68 @@ public class Application {
         System.out.println("**************************************");
 
 
+    }
+
+
+    public static void handleUserLoginAndRegister() {
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        while (!logged) {
+            System.out.println("Seleziona un'opzione:");
+            System.out.println("1. Registrati come Utente Normale");
+            System.out.println("2. Registrati come Admin");
+            System.out.println("3. Effettua il login");
+            System.out.println("4. Esci");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                case 2:
+                    System.out.print("Inserisci il nome utente: ");
+                    String username = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Inserisci la password: ");
+                    String password = scanner.next();
+                    scanner.nextLine();
+                    if (!users.containsKey(username)) {
+                        users.put(username, password);
+                        //entra in questo case sia se la scelta é uno sia se é due.
+                        //quindi, per stabilire se é un admin, passo il risultato booleano della condizione choice == 2
+                        isAdmin.put(username, choice == 2);
+                        System.out.println("Registrazione avvenuta con successo.");
+                    } else {
+                        System.out.println("Username già in uso. Riprova.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Inserisci il nome utente: ");
+                    String loginUsername = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Inserisci la password: ");
+                    String loginPassword = scanner.next();
+                    scanner.nextLine();
+                    if (users.containsKey(loginUsername) && users.get(loginUsername).equals(loginPassword)) {
+                        boolean isUserAdmin = isAdmin.get(loginUsername);
+                        if (isUserAdmin) {
+                            System.out.println("Accesso come Admin effettuato con successo per l'utente: " + loginUsername);
+                        } else {
+                            System.out.println("Accesso come Utente Normale effettuato con successo per l'utente: " + loginUsername);
+                        }
+                        logged = true;
+                    } else {
+                        System.out.println("Credenziali non valide. Riprova.");
+                    }
+                    break;
+                case 4:
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
+            }
+        }
     }
 }
 
