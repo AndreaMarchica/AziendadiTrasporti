@@ -8,8 +8,8 @@ import java.util.UUID;
 @Entity
 /*@NamedQueries(
         @NamedQuery(
-                name = "TrattacountPercorsiPerMezzo",
-                query = "SELECT COUNT(x) FROM Mezzi x WHERE t.Tratta.id = :trattaId AND t.id = :mezzoId"
+                name = "quanteVolteUnMezzoPercorreUnaTratta",
+                query = "SELECT COUNT(t) FROM Tratta t WHERE t.Tratta.id = :trattaId AND t.id = :mezzoId"
         )
 )*/
 
@@ -32,9 +32,8 @@ public class Tratta {
     )
     private List<MezzoDiTrasporto> mezzi = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "storico_tratte")
-    private StoricoTratte storicoTratte;
+    @OneToMany(mappedBy = "tratta")
+    private List<StoricoTratte> trattePercorse = new ArrayList<>();
 
 
 
