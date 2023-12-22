@@ -189,6 +189,40 @@ public class Application {
 
     }
 
+    public static int userOptions(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Cosa vuoi fare oggi?");
+        System.out.println("1. Scegli un distributore (Automatico - Autorizzato)");
+        System.out.println("2. Compra un biglietto");
+        System.out.println("3. Effettua un abbonamento");
+        System.out.println("4. Dai un'occhiata a tutte le tratte disponibili");
+        System.out.println("5. Prendi un Autobus");
+        System.out.println("6. Prendi un Tram");
+        System.out.println("7. Esci");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        return choice;
+    }
+
+    public static void userInteract(boolean existedBefore){
+
+        System.out.println("Ciao, " + loggedUser.nome_utente + "!");
+        if(!loggedUserAdmin) {
+            if (existedBefore) {
+
+                userOptions();
+            } else {
+                System.out.println("Prima di tutto, crea la tua tessera:");
+                //codice per creare la tessera
+
+                //codice da eseguire una volta creata
+                userOptions();
+            }
+        }else{
+            //codice per gli admin
+        }
+    }
+
 
     public static void handleUserLoginAndRegister() {
 
@@ -241,6 +275,7 @@ public class Application {
                         Utente newUser = new Utente(username, lastName, password, choice == 2);
                         userDAO.save(newUser);
                         System.out.println("Registrazione avvenuta con successo.");
+                        userInteract(true);
                         System.out.println(users);
                     } else {
                         System.out.println("Username già in uso. Riprova.");
@@ -262,6 +297,7 @@ public class Application {
                         }
                         loggedUser = userDAO.getFromLogin(loginUsername, loginPassword);
                         logged = true;
+                        userInteract(false);
                     } else {
                         System.out.println("Credenziali non valide. Riprova.");
                     }
