@@ -186,10 +186,9 @@ public class Application {
         System.out.println("**************************************");
 
 
-
     }
 
-    public static int userOptions(){
+    public static int userOptions() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Cosa vuoi fare oggi?");
         System.out.println("1. Scegli un distributore (Automatico - Autorizzato)");
@@ -204,13 +203,16 @@ public class Application {
         return choice;
     }
 
-    public static void userInteract(boolean existedBefore){
+    public static void userInteract(boolean existedBefore) {
 
         System.out.println("Ciao, " + loggedUser.nome_utente + "!");
-        if(!loggedUserAdmin) {
+        if (!loggedUserAdmin) {
             if (existedBefore) {
-
-                userOptions();
+                switch (userOptions()){
+                    case 5:
+                        takeAutoBus();
+                        break;
+                }
             } else {
                 System.out.println("Prima di tutto, crea la tua tessera:");
                 //codice per creare la tessera
@@ -218,9 +220,15 @@ public class Application {
                 //codice da eseguire una volta creata
                 userOptions();
             }
-        }else{
+        } else {
             //codice per gli admin
         }
+    }
+
+    public static void takeAutoBus() {
+        EntityManager em = emf.createEntityManager();
+        MezzoDiTrasportoDAO mezzoDiTrasportoDAO = new MezzoDiTrasportoDAO(em);
+        mezzoDiTrasportoDAO.getAllAutobus().forEach(System.out::println);
     }
 
 
@@ -232,8 +240,8 @@ public class Application {
 
         List<Utente> usersDB = userDAO.getAll();
 
-        if(!usersDB.isEmpty()){
-            for(Utente user : usersDB){
+        if (!usersDB.isEmpty()) {
+            for (Utente user : usersDB) {
                 String username = user.nome_utente;
                 String password = user.getPassword();
                 boolean isAdmin_bool = user.isAdmin();
@@ -261,7 +269,8 @@ public class Application {
                 case 2:
                     System.out.print("Inserisci il nome utente: ");
                     String username = scanner.next();
-                    scanner.nextLine();                    System.out.print("Inserisci il cognome: ");
+                    scanner.nextLine();
+                    System.out.print("Inserisci il cognome: ");
                     String lastName = scanner.next();
                     scanner.nextLine();
                     System.out.print("Inserisci la password: ");
