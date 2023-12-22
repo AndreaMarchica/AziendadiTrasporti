@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -42,7 +43,7 @@ public class Application {
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
 
-
+/*
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
 
         for (int i = 0; i < 10; i++) {
@@ -127,6 +128,109 @@ public class Application {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
         }
+
+
+
+
+
+*/
+
+        String nomeUtente = "Aldo";
+        UtenteDAO utenteDAO = new UtenteDAO(em);
+        if (utenteDAO  == null) {
+            System.out.println("Tessera non è valida");
+        } else {
+            System.out.println("Tessera valida");
+            System.out.println(utenteDAO);
+        }
+
+//**********************************SCANNER********************************************
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Benvenuto in BerlusconiBus!");
+        System.out.println("·····································································");
+        System.out.println(":    _      ____   ____   _____                               _   _ :");
+        System.out.println(":   / \\    / ___| / ___| |_   _| __ __ _ ___ _ __   ___  _ __| |_(_):");
+        System.out.println(":  / _ \\  | |  _ | |  _    | || '__/ _` / __| '_ \\ / _ \\| '__| __| |:");
+        System.out.println(": / ___ \\ | |_| || |_| |   | || | | (_| \\__ \\ |_) | (_) | |  | |_| |:");
+        System.out.println(":/_/  \\_\\(_)____(_)____|   |_||_|  \\__,_|___/ .__/ \\___/|_|   \\__|_|:");
+        System.out.println(":                                           |_|                     :");
+        System.out.println("·····································································");
+
+        System.out.println("Accedi come: ");
+        System.out.println("1.Utente        2.Amministrattore");
+
+        int input = scanner.nextInt();
+        switch (input) {
+            case 1:
+                System.out.println("Inserisci le credenziali");
+                String nomeUtente1 = scanner.next();
+                switch (nomeUtente) {
+                    case "nomenellalista" :
+                        System.out.println("Benvenuto Nome Cognome");
+                        System.out.println("id");
+                        System.out.println("Scadenza Tessera : 123");
+                        //qua un altro case che guarda se la tessera è scaduta allora da l'opzione di rinnovarla.
+                        // qua un altro case che guarda se c'è presente un abbonamento valido.
+                        System.out.println("Tuo Abbonamento: ottieni tipo. è valido fino al 1234");
+                        break;
+                    default:
+                        System.out.println("Non è stato trovato nessun utente con quel nome");
+                        break;
+                }
+
+            case 2:
+                System.out.println("Inserisci i codice Amministratore");
+                short password = scanner.nextShort();
+                switch (password) {
+                    case 1234:
+                        System.out.println("Benvenuto Admin");
+                        System.out.println("1. Numero di mezzi");
+                        System.out.println("2. Numero di mezzi in manutenzione");
+                        System.out.println("3. Tratte");
+                        System.out.println("4. Verifica abbonamento Utente");
+                        System.out.println("5. Verifica Biglietto");
+                        System.out.println("6. Lista rivenditori ");
+                        System.out.println("7. Storico manutenzione");
+                        System.out.println("8. Lista Utenti");
+                        System.out.println("9. Lista Tessere");
+                        System.out.println("0. Esci");
+                        int chooseAdminOption = scanner.nextInt();
+                        switch (chooseAdminOption){
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                            case 10:
+                            default:
+                                System.out.println("Input non valido");
+                        }
+                    default:
+                        System.out.println("Credenziali Admin sbagliate");
+                        break;
+                }
+
+            default:
+                System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+        }
+
+        scanner.close();
+
+
+
+
+
+
+
+
+
+
+
 
 
         em.close();
