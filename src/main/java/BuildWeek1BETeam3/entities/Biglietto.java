@@ -10,7 +10,7 @@ import java.time.LocalDate;
         query = "SELECT x FROM Biglietto x WHERE x.vidimazione BETWEEN :startPeriod AND :endPeriod"
 ))
 
-
+@NamedQuery(name = "getAllVidimati", query = "SELECT b FROM Biglietto b WHERE b.vidimazione IS NOT NULL")
 public class Biglietto extends TitoloDiViaggio{
     private LocalDate emissione;
     private LocalDate vidimazione;

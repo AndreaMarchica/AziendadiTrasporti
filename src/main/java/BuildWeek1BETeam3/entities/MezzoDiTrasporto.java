@@ -11,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="mezzi_di_trasporto")
+@NamedQuery(name = "getAllOutOfService", query = "SELECT m FROM MezzoDiTrasporto m WHERE m.stato.fineManutenzione is null AND m.stato.inizioManutenzione is not null")
 public abstract class MezzoDiTrasporto {
 
     @Id
@@ -86,10 +87,6 @@ public abstract class MezzoDiTrasporto {
     public String toString() {
         return "MezzoDiTrasporto{" +
                 "id=" + id +
-                ", capienza=" + capienza +
-                ", dataPrimoImpiego=" + dataPrimoImpiego +
-                ", tratte=" + tratte +
-                ", stato=" + stato +
                 '}';
     }
 }

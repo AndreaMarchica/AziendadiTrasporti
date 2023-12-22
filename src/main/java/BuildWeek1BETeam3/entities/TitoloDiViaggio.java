@@ -10,8 +10,8 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo_entita", discriminatorType = DiscriminatorType.STRING)
 @NamedQuery(name = "findNumberTitoliByPeriod", query = "SELECT COUNT(t) FROM TitoloDiViaggio t " +
-        "WHERE t.emissione BETWEEN :startDate AND :endDate " +
-        "AND t.puntodiemissione.codice_ID = :puntodiemissione")
+                                                        "WHERE t.emissione BETWEEN :startDate AND :endDate " +
+                                                        "AND t.puntodiemissione.codice_ID = :puntodiemissione")
 public abstract class TitoloDiViaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

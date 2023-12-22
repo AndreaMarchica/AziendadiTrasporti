@@ -162,6 +162,8 @@ public class Application {
 
         handleUserLoginAndRegister();
 
+        new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
+        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);
 
         em.close();
         emf.close();
@@ -170,6 +172,7 @@ public class Application {
         System.out.println("**************************************");
         System.out.println("Hello Moto!");
         System.out.println("**************************************");
+
 
 
     }
