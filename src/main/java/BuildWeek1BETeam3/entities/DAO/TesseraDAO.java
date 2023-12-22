@@ -44,7 +44,7 @@ public class TesseraDAO {
         return found;
     }
 
-    public List<Tessera> getAll(){
+    public static List<Tessera> getAll(){
         TypedQuery<Tessera> query = em.createQuery("SELECT t from Tessera t", Tessera.class);
         return query.getResultList();
     }

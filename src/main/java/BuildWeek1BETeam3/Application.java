@@ -204,6 +204,8 @@ public class Application {
         return choice;
     }
 
+
+
     public static void userInteract(boolean existedBefore){
 
         System.out.println("Ciao, " + loggedUser.nome_utente + "!");
@@ -222,6 +224,17 @@ public class Application {
             //codice per gli admin
         }
     }
+    public static void ottieniTratte() {
+
+        EntityManager em = emf.createEntityManager();
+
+        List<Tratta> tratteLista  = TrattaDAO.getAll();
+
+        System.out.println("Lista delle tratte:");
+        for (Tratta tratta : tratteLista) {
+            System.out.println(tratta);
+        }
+        }
 
 
     public static void handleUserLoginAndRegister() {
