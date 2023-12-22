@@ -81,4 +81,9 @@ public class MezzoDiTrasportoDAO {
         TypedQuery<MezzoDiTrasporto> query = em.createQuery("SELECT m from MezzoDiTrasporto m", MezzoDiTrasporto.class);
         return query.getResultList();
     }
+
+    public List<MezzoDiTrasporto> getAllOutOfService(){
+        TypedQuery<MezzoDiTrasporto> query = em.createNamedQuery("getAllOutOfService", MezzoDiTrasporto.class);
+        return query.getResultList();
+    }
 }

@@ -1,5 +1,6 @@
 package BuildWeek1BETeam3.entities.DAO;
 
+import BuildWeek1BETeam3.entities.MezzoDiTrasporto;
 import BuildWeek1BETeam3.entities.PuntoDiEmissione;
 import BuildWeek1BETeam3.entities.Stato;
 
