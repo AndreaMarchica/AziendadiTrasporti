@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@NamedQuery(
-        name = "verificaCredenziali",
-        query = "SELECT u FROM Utente u " +
-                "WHERE u.nome = :nomeUtente"
-)
+//@NamedQuery(
+//        name = "verificaCredenziali",
+//        query = "SELECT u FROM Utente u " +
+//                "WHERE u.nome = :nomeUtente"
+//)
 public class Utente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

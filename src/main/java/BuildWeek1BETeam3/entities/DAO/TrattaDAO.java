@@ -67,7 +67,7 @@ public class TrattaDAO {
         return  query.getSingleResult();
     }*/
 
-    public static List<Tratta> getAll(){
+    public List<Tratta> getAll(){
         TypedQuery<Tratta> query = em.createQuery("SELECT t from Tratta t", Tratta.class);
         return query.getResultList();
     }
