@@ -64,4 +64,11 @@ public class UtenteDAO {
         TypedQuery<Utente> query = em.createQuery("SELECT u from Utente u", Utente.class);
         return query.getResultList();
     }
+
+    public Utente getFromLogin(String username, String password){
+        TypedQuery<Utente> query = em.createQuery("SELECT u FROM Utente u WHERE nome_utente = :nome AND password_utente = :password", Utente.class);
+        query.setParameter("nome", username);
+        query.setParameter("password", password);
+        return query.getSingleResult();
+    }
 }

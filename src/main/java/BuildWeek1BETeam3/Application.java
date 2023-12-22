@@ -14,8 +14,13 @@ import java.util.function.Supplier;
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
     private static final Map<String, String> users = new HashMap<>();
-    private static final Map<String, Boolean> isAdmin = new HashMap<>();
+    static final Map<String, Boolean> isAdmin = new HashMap<>();
     private static boolean logged = false;
+
+    private static Utente loggedUser = null;
+
+    private static boolean loggedUserAdmin = false;
+
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
@@ -25,7 +30,7 @@ public class Application {
 //        System.out.println(dao.findNumberTitoliByPeriod(LocalDate.now().minusWeeks(1), LocalDate.now().plusDays(20), UUID.fromString("8b5d8eaf-06b8-46f5-98d1-0de88d3f9c9a")));
 
 
-        Faker faker = new Faker(Locale.ITALIAN);
+/*        Faker faker = new Faker(Locale.ITALIAN);
 
         Supplier<LocalDate> dateSupplier = () -> {
             Random rdm = new Random();
@@ -44,12 +49,10 @@ public class Application {
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
         StoricoTratteDAO std = new StoricoTratteDAO(em);
         StatoDao sd = new StatoDao(em);
-        StoricoManutenzioneDAO smd = new StoricoManutenzioneDAO(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-/*
         for (int i = 0; i < 10; i++) {
-            Utente u = new Utente(faker.name().name(), faker.name().lastName());
+            Utente u = new Utente(faker.name().name(), faker.name().lastName(), faker.idNumber().ssnValid(), faker.bool().bool());
             ud.save(u);
         }
 
@@ -67,6 +70,7 @@ public class Application {
 
 
 //        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
+
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int posti = rndm.nextInt(50, 100);
@@ -132,7 +136,6 @@ public class Application {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
         }
-*/
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
@@ -164,32 +167,15 @@ public class Application {
 
  //       handleUserLoginAndRegister();
 
-/*        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
+        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
         MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1bcc7861-3788-41b3-bb2a-3e8db1053b04"));
         berlusconiBus.timbraBiglietto(biglietto2);
         mtd.update(berlusconiBus);
 
-        new TitoloDiViaggioDAO(em).getVidimatiOnMezzo(berlusconiBus).forEach(System.out::println);
-
-
         new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
         new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);*/
 
-
-        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.of(2023, 12,11), TipoManutenzione.STRAORDINARIA, mtd.getById(UUID.fromString("017835a1-0fd9-4ab0-b60a-f1031c3a6705")));
-  //      sd.save(manutenzione1);
-        MezzoDiTrasporto alala = mtd.getById(UUID.fromString("017835a1-0fd9-4ab0-b60a-f1031c3a6705"));
-/*        alala.setStato(manutenzione1);
-        mtd.update(alala);*/
-
-        Stato manutenzione2 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.of(2023, 12,11), TipoManutenzione.ORDINARIA, mtd.getById(UUID.fromString("017835a1-0fd9-4ab0-b60a-f1031c3a6705")));
-        sd.save(manutenzione2);
-        alala.setStato(manutenzione2);
-        mtd.update(alala);
-
-        StoricoManutenzione gesù = new StoricoManutenzione(alala);
-        smd.save(gesù);
-
+        handleUserLoginAndRegister();
 
         em.close();
         emf.close();
@@ -207,6 +193,24 @@ public class Application {
     public static void handleUserLoginAndRegister() {
 
         Scanner scanner = new Scanner(System.in);
+        EntityManager em = emf.createEntityManager();
+        UtenteDAO userDAO = new UtenteDAO(em);
+
+        List<Utente> usersDB = userDAO.getAll();
+
+        if(!usersDB.isEmpty()){
+            for(Utente user : usersDB){
+                String username = user.nome_utente;
+                String password = user.getPassword();
+                boolean isAdmin_bool = user.isAdmin();
+
+                users.put(username, password);
+                isAdmin.put(username, isAdmin_bool);
+
+                System.out.println(username + password);
+                System.out.println(users);
+            }
+        }
 
 
         while (!logged) {
@@ -223,6 +227,8 @@ public class Application {
                 case 2:
                     System.out.print("Inserisci il nome utente: ");
                     String username = scanner.next();
+                    scanner.nextLine();                    System.out.print("Inserisci il cognome: ");
+                    String lastName = scanner.next();
                     scanner.nextLine();
                     System.out.print("Inserisci la password: ");
                     String password = scanner.next();
@@ -232,7 +238,10 @@ public class Application {
                         //entra in questo case sia se la scelta é uno sia se é due.
                         //quindi, per stabilire se é un admin, passo il risultato booleano della condizione choice == 2
                         isAdmin.put(username, choice == 2);
+                        Utente newUser = new Utente(username, lastName, password, choice == 2);
+                        userDAO.save(newUser);
                         System.out.println("Registrazione avvenuta con successo.");
+                        System.out.println(users);
                     } else {
                         System.out.println("Username già in uso. Riprova.");
                     }
@@ -251,6 +260,7 @@ public class Application {
                         } else {
                             System.out.println("Accesso come Utente Normale effettuato con successo per l'utente: " + loginUsername);
                         }
+                        loggedUser = userDAO.getFromLogin(loginUsername, loginPassword);
                         logged = true;
                     } else {
                         System.out.println("Credenziali non valide. Riprova.");
