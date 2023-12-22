@@ -1,5 +1,6 @@
 package BuildWeek1BETeam3.entities.DAO;
 
+import BuildWeek1BETeam3.entities.MezzoDiTrasporto;
 import BuildWeek1BETeam3.entities.PuntoDiEmissione;
 import BuildWeek1BETeam3.entities.Stato;
 
@@ -27,6 +28,23 @@ public class StatoDao {
             transaction.commit();
 
             System.out.println("Stato salvato nel database.");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(Stato Stato) {
+        try {
+            EntityTransaction transaction = em.getTransaction();
+
+            transaction.begin();
+
+            em.merge(Stato);
+
+            transaction.commit();
+
+            System.out.println("Stato aggiornato nel database.");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

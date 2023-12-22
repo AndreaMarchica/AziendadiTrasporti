@@ -72,4 +72,9 @@ public class TitoloDiViaggioDAO {
         return query.getSingleResult();
     }
 
+    public List<TitoloDiViaggio> getAllVidimati(){
+        TypedQuery<TitoloDiViaggio> query = em.createNamedQuery("getAllVidimati", TitoloDiViaggio.class);
+        return query.getResultList();
+    }
+
 }

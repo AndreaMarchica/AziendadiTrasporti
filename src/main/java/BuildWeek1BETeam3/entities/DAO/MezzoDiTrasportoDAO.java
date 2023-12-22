@@ -60,8 +60,30 @@ public class MezzoDiTrasportoDAO {
         }
     }
 
+    public void update(MezzoDiTrasporto mezzoDiTrasporto) {
+        try {
+            EntityTransaction transaction = em.getTransaction();
+
+            transaction.begin();
+
+            em.merge(mezzoDiTrasporto);
+
+            transaction.commit();
+
+            System.out.println("mezzo di trasporto aggiornato nel database.");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public List<MezzoDiTrasporto> getAll(){
         TypedQuery<MezzoDiTrasporto> query = em.createQuery("SELECT m from MezzoDiTrasporto m", MezzoDiTrasporto.class);
+        return query.getResultList();
+    }
+
+    public List<MezzoDiTrasporto> getAllOutOfService(){
+        TypedQuery<MezzoDiTrasporto> query = em.createNamedQuery("getAllOutOfService", MezzoDiTrasporto.class);
         return query.getResultList();
     }
 }

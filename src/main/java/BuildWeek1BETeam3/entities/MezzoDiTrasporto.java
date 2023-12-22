@@ -11,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="mezzi_di_trasporto")
+@NamedQuery(name = "getAllOutOfService", query = "SELECT m FROM MezzoDiTrasporto m WHERE m.stato.fineManutenzione is null AND m.stato.inizioManutenzione is not null")
 public abstract class MezzoDiTrasporto {
 
     @Id
@@ -30,6 +31,9 @@ public abstract class MezzoDiTrasporto {
     @ManyToOne
     @JoinColumn(name = "stato_id")
     private Stato stato;
+
+    @OneToMany(mappedBy = "mezzoditrasporto")
+    private List<Biglietto> bigliettiVidimatiSulMezzo;
 
     /*COSTRUTTORI*/
 
@@ -82,14 +86,20 @@ public abstract class MezzoDiTrasporto {
         this.stato = stato;
     }
 
+    public void timbraBiglietto(Biglietto biglietto){
+        if(bigliettiVidimatiSulMezzo.contains(biglietto)){
+            System.out.println("Il biglietto è già stato vidimato!");
+            return;
+        }
+        bigliettiVidimatiSulMezzo.add(biglietto);
+        biglietto.setMezzoDiTrasporto(this);
+        biglietto.setVidimazione(LocalDate.now());
+    }
+
     @Override
     public String toString() {
         return "MezzoDiTrasporto{" +
                 "id=" + id +
-                ", capienza=" + capienza +
-                ", dataPrimoImpiego=" + dataPrimoImpiego +
-                ", tratte=" + tratte +
-                ", stato=" + stato +
                 '}';
     }
 }
