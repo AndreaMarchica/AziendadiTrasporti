@@ -14,6 +14,8 @@ import java.time.LocalDate;
 public class Biglietto extends TitoloDiViaggio{
     private LocalDate emissione;
     private LocalDate vidimazione;
+    @ManyToOne
+    private MezzoDiTrasporto mezzoDiTrasporto;
 
     public Biglietto (){
         this.emissione = LocalDate.now();
@@ -28,6 +30,14 @@ public class Biglietto extends TitoloDiViaggio{
     }
     public void setVidimazione(LocalDate vidimazione) {
         this.vidimazione = vidimazione;
+    }
+
+    public MezzoDiTrasporto getMezzoDiTrasporto() {
+        return mezzoDiTrasporto;
+    }
+
+    public void setMezzoDiTrasporto(MezzoDiTrasporto mezzoDiTrasporto) {
+        this.mezzoDiTrasporto = mezzoDiTrasporto;
     }
 
     @Override

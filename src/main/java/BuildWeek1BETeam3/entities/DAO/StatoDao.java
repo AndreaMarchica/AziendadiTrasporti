@@ -33,6 +33,23 @@ public class StatoDao {
         }
     }
 
+    public void update(Stato Stato) {
+        try {
+            EntityTransaction transaction = em.getTransaction();
+
+            transaction.begin();
+
+            em.merge(Stato);
+
+            transaction.commit();
+
+            System.out.println("Stato aggiornato nel database.");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public Stato getById(UUID id) {
         Stato found = em.find(Stato.class, id);
         if (found == null) {

@@ -46,7 +46,7 @@ public class Application {
         StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-  /*      for (int i = 0; i < 10; i++) {
+/*        for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
@@ -135,32 +135,37 @@ public class Application {
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-       /* MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
+ //       MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
 
 
         //ricupero una tratta dal db
 
         Tratta trattaUno = td.getById(UUID.fromString("1d345322-3f7f-4112-ba42-d309dc853c68"));
 
-        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
+ //       StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
 
 //        std.save(trattaNunzio);
 
 
 //        **************************************CREAO UNO STATO DEL MEZZO***********************************
 
-        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(), TipoManutenzione.STRAORDINARIA, berlusconiBus);
-        sd.save(manutenzione1);
+ //       Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(), TipoManutenzione.STRAORDINARIA, berlusconiBus);
+ //       sd.save(manutenzione1);
 
         //****************************ASSEGNO LO STATO AL MEZZO ESISTENTE PRESO DAL DATABASE**********
 
-        berlusconiBus.setStato(manutenzione1);
+//        berlusconiBus.setStato(manutenzione1);
 
 //       ***************************AGGIORNO LO STATO DEL MEZZO*************************************
 
-        mtd.save(berlusconiBus);*/
+ //       mtd.save(berlusconiBus);
 
-        handleUserLoginAndRegister();
+ //       handleUserLoginAndRegister();
+
+        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
+        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1bcc7861-3788-41b3-bb2a-3e8db1053b04"));
+        berlusconiBus.timbraBiglietto(biglietto2);
+        mtd.update(berlusconiBus);
 
 
         em.close();

@@ -31,6 +31,9 @@ public abstract class MezzoDiTrasporto {
     @JoinColumn(name = "stato_id")
     private Stato stato;
 
+    @OneToMany(mappedBy = "mezzoditrasporto")
+    private List<Biglietto> bigliettiVidimatiSulMezzo;
+
     /*COSTRUTTORI*/
 
     public MezzoDiTrasporto() {
@@ -80,6 +83,16 @@ public abstract class MezzoDiTrasporto {
 
     public void setStato(Stato stato) {
         this.stato = stato;
+    }
+
+    public void timbraBiglietto(Biglietto biglietto){
+        if(bigliettiVidimatiSulMezzo.contains(biglietto)){
+            System.out.println("Il biglietto è già stato vidimato!");
+            return;
+        }
+        bigliettiVidimatiSulMezzo.add(biglietto);
+        biglietto.setMezzoDiTrasporto(this);
+        biglietto.setVidimazione(LocalDate.now());
     }
 
     @Override
