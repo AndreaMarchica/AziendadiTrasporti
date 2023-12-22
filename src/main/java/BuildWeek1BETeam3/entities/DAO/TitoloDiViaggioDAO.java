@@ -1,5 +1,6 @@
 package BuildWeek1BETeam3.entities.DAO;
 
+import BuildWeek1BETeam3.entities.MezzoDiTrasporto;
 import BuildWeek1BETeam3.entities.PuntoDiEmissione;
 import BuildWeek1BETeam3.entities.TitoloDiViaggio;
 
@@ -70,6 +71,12 @@ public class TitoloDiViaggioDAO {
         query.setParameter("endDate", endDate);
         query.setParameter("puntodiemissione", puntoDiEmissioneID);
         return query.getSingleResult();
+    }
+
+    public List<TitoloDiViaggio> getVidimatiOnMezzo(MezzoDiTrasporto mezzoDiTrasporto){
+        TypedQuery<TitoloDiViaggio> query = em.createNamedQuery("getVidimatiOnMezzo", TitoloDiViaggio.class);
+        query.setParameter("mezzoId", mezzoDiTrasporto.getId());
+        return query.getResultList();
     }
 
     public List<TitoloDiViaggio> getAllVidimati(){
