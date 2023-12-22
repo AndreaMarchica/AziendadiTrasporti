@@ -44,9 +44,11 @@ public class Application {
         PuntoDiEmissioneDAO ped = new PuntoDiEmissioneDAO(em);
         StoricoTratteDAO std = new StoricoTratteDAO(em);
         StatoDao sd = new StatoDao(em);
+        StoricoManutenzioneDAO smd = new StoricoManutenzioneDAO(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-/*        for (int i = 0; i < 10; i++) {
+/*
+        for (int i = 0; i < 10; i++) {
             Utente u = new Utente(faker.name().name(), faker.name().lastName());
             ud.save(u);
         }
@@ -65,7 +67,6 @@ public class Application {
 
 
 //        **************************************** CREAZIONE DEI BUS E SALVATAGGIO *******************************
-
         for (int i = 0; i < 10; i++) {
             Random rndm = new Random();
             int posti = rndm.nextInt(50, 100);
@@ -130,7 +131,8 @@ public class Application {
         } else {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }*/
+        }
+*/
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
@@ -162,13 +164,32 @@ public class Application {
 
  //       handleUserLoginAndRegister();
 
-        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
+/*        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
         MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1bcc7861-3788-41b3-bb2a-3e8db1053b04"));
         berlusconiBus.timbraBiglietto(biglietto2);
         mtd.update(berlusconiBus);
 
+        new TitoloDiViaggioDAO(em).getVidimatiOnMezzo(berlusconiBus).forEach(System.out::println);
+
+
         new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
-        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);
+        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);*/
+
+
+        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.of(2023, 12,11), TipoManutenzione.STRAORDINARIA, mtd.getById(UUID.fromString("017835a1-0fd9-4ab0-b60a-f1031c3a6705")));
+  //      sd.save(manutenzione1);
+        MezzoDiTrasporto alala = mtd.getById(UUID.fromString("017835a1-0fd9-4ab0-b60a-f1031c3a6705"));
+/*        alala.setStato(manutenzione1);
+        mtd.update(alala);*/
+
+        Stato manutenzione2 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.of(2023, 12,11), TipoManutenzione.ORDINARIA, mtd.getById(UUID.fromString("017835a1-0fd9-4ab0-b60a-f1031c3a6705")));
+        sd.save(manutenzione2);
+        alala.setStato(manutenzione2);
+        mtd.update(alala);
+
+        StoricoManutenzione gesù = new StoricoManutenzione(alala);
+        smd.save(gesù);
+
 
         em.close();
         emf.close();

@@ -32,6 +32,10 @@ public abstract class MezzoDiTrasporto {
     @JoinColumn(name = "stato_id")
     private Stato stato;
 
+    @ManyToOne
+    @JoinColumn(name = "manutenzione_id")
+    private StoricoManutenzione storicoManutenzione;
+
     @OneToMany(mappedBy = "mezzoditrasporto")
     private List<Biglietto> bigliettiVidimatiSulMezzo;
 
