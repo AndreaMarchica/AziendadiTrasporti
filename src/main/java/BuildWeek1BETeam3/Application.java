@@ -30,7 +30,7 @@ public class Application {
 //        System.out.println(dao.findNumberTitoliByPeriod(LocalDate.now().minusWeeks(1), LocalDate.now().plusDays(20), UUID.fromString("8b5d8eaf-06b8-46f5-98d1-0de88d3f9c9a")));
 
 
-/*        Faker faker = new Faker(Locale.ITALIAN);
+        Faker faker = new Faker(Locale.ITALIAN);
 
         Supplier<LocalDate> dateSupplier = () -> {
             Random rdm = new Random();
@@ -128,14 +128,14 @@ public class Application {
         }
 
 
-        UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
-        TesseraDAO tesseraDAO = new TesseraDAO(em);
-        if (tesseraDAO.isAbbonamentoValido(tesseraId) == null) {
-            System.out.println("Tessera non è valida");
-        } else {
-            System.out.println("Tessera valida");
-            System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }
+//        UUID tesseraId = UUID.fromString("f20a3582-5e8d-416f-9a89-5e8acd2a0e21");
+//        TesseraDAO tesseraDAO = new TesseraDAO(em);
+//        if (tesseraDAO.isAbbonamentoValido(tesseraId) == null) {
+//            System.out.println("Tessera non è valida");
+//        } else {
+//            System.out.println("Tessera valida");
+//            System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
+//        }
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
@@ -145,7 +145,7 @@ public class Application {
 
         //ricupero una tratta dal db
 
-        Tratta trattaUno = td.getById(UUID.fromString("1d345322-3f7f-4112-ba42-d309dc853c68"));
+//        Tratta trattaUno = td.getById(UUID.fromString("1d345322-3f7f-4112-ba42-d309dc853c68"));
 
  //       StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
 
@@ -167,13 +167,13 @@ public class Application {
 
  //       handleUserLoginAndRegister();
 
-        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1bcc7861-3788-41b3-bb2a-3e8db1053b04"));
-        berlusconiBus.timbraBiglietto(biglietto2);
-        mtd.update(berlusconiBus);
-
-        new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
-        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);*/
+//        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
+//        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1bcc7861-3788-41b3-bb2a-3e8db1053b04"));
+//        berlusconiBus.timbraBiglietto(biglietto2);
+//        mtd.update(berlusconiBus);
+//
+//        new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
+//        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);
 
         handleUserLoginAndRegister();
 
@@ -181,15 +181,9 @@ public class Application {
         emf.close();
 
 
-        System.out.println("**************************************");
-        System.out.println("Hello Moto!");
-        System.out.println("**************************************");
-
-
-
     }
 
-    public static int userOptions(){
+    public static int userOptions() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Cosa vuoi fare oggi?");
         System.out.println("1. Scegli un distributore (Automatico - Autorizzato)");
@@ -204,13 +198,16 @@ public class Application {
         return choice;
     }
 
-    public static void userInteract(boolean existedBefore){
+    public static void userInteract(boolean existedBefore) {
 
         System.out.println("Ciao, " + loggedUser.nome_utente + "!");
-        if(!loggedUserAdmin) {
+        if (!loggedUserAdmin) {
             if (existedBefore) {
-
-                userOptions();
+                switch (userOptions()){
+                    case 5:
+                        takeAutoBus();
+                        break;
+                }
             } else {
                 System.out.println("Prima di tutto, crea la tua tessera:");
                 //codice per creare la tessera
@@ -218,9 +215,15 @@ public class Application {
                 //codice da eseguire una volta creata
                 userOptions();
             }
-        }else{
+        } else {
             //codice per gli admin
         }
+    }
+
+    public static void takeAutoBus() {
+        EntityManager em = emf.createEntityManager();
+        MezzoDiTrasportoDAO mezzoDiTrasportoDAO = new MezzoDiTrasportoDAO(em);
+        mezzoDiTrasportoDAO.getAllAutobus().forEach(System.out::println);
     }
 
 
@@ -232,17 +235,14 @@ public class Application {
 
         List<Utente> usersDB = userDAO.getAll();
 
-        if(!usersDB.isEmpty()){
-            for(Utente user : usersDB){
+        if (!usersDB.isEmpty()) {
+            for (Utente user : usersDB) {
                 String username = user.nome_utente;
                 String password = user.getPassword();
                 boolean isAdmin_bool = user.isAdmin();
 
                 users.put(username, password);
                 isAdmin.put(username, isAdmin_bool);
-
-                System.out.println(username + password);
-                System.out.println(users);
             }
         }
 
@@ -261,7 +261,8 @@ public class Application {
                 case 2:
                     System.out.print("Inserisci il nome utente: ");
                     String username = scanner.next();
-                    scanner.nextLine();                    System.out.print("Inserisci il cognome: ");
+                    scanner.nextLine();
+                    System.out.print("Inserisci il cognome: ");
                     String lastName = scanner.next();
                     scanner.nextLine();
                     System.out.print("Inserisci la password: ");
@@ -276,7 +277,6 @@ public class Application {
                         userDAO.save(newUser);
                         System.out.println("Registrazione avvenuta con successo.");
                         userInteract(true);
-                        System.out.println(users);
                     } else {
                         System.out.println("Username già in uso. Riprova.");
                     }
