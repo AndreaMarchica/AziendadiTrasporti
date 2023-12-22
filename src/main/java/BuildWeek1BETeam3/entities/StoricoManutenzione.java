@@ -12,8 +12,11 @@ public class StoricoManutenzione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id_StoricoManutenzioni;
 
+
     @OneToMany(mappedBy = "storicoManutenzioni")
     private List<Stato> storicoManutenzioni = new ArrayList<>();
+
+    public void StoricoManutenzione(){}
 
     public UUID getId_StoricoManutenzioni() {
         return id_StoricoManutenzioni;
@@ -29,6 +32,18 @@ public class StoricoManutenzione {
         this.storicoManutenzioni = storicoManutenzioni;
     }
 
-    public StoricoManutenzione(){
+    public void aggiungiStato(Stato stato) {
+        this.storicoManutenzioni.add(stato);
+    }
+    public void rimuoviStato(Stato stato) {
+        this.storicoManutenzioni.remove(stato);
+    }
+
+    @Override
+    public String toString() {
+        return "StoricoManutenzione{" +
+                "id_StoricoManutenzioni=" + id_StoricoManutenzioni +
+                ", storicoManutenzioni=" + storicoManutenzioni +
+                '}';
     }
 }

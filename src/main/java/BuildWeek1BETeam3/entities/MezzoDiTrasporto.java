@@ -13,15 +13,11 @@ import java.util.UUID;
 @DiscriminatorColumn(name="mezzi_di_trasporto")
 public abstract class MezzoDiTrasporto {
 
-    /*ATTRIBUTI*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private UUID id;
     private int capienza;
     private LocalDate dataPrimoImpiego;
-
-
 
     @ManyToMany
     @JoinTable(
@@ -31,25 +27,35 @@ public abstract class MezzoDiTrasporto {
     )
     private List<Tratta> tratte = new ArrayList<>();
 
-@ManyToOne
-@JoinColumn(name="stato_manutenzione")
-private Stato stato;
-
+    @ManyToOne
+    @JoinColumn(name = "stato_id")
+    private Stato stato;
 
     /*COSTRUTTORI*/
 
     public MezzoDiTrasporto() {
     }
 
-    public MezzoDiTrasporto(int capienza, LocalDate dataPrimoImpiego) {
+    public MezzoDiTrasporto(int capienza, LocalDate dataPrimoImpiego, Stato stato) {
         this.capienza = capienza;
         this.dataPrimoImpiego = dataPrimoImpiego;
-
+        this.stato = stato;
+        this.tratte = new ArrayList<>();
     }
 
     /*METODI*/
 
+    public List<Tratta> getTratte() {
+        return tratte;
+    }
 
+    public void aggiungiTratta(Tratta tratta) {
+        this.tratte.add(tratta);
+    }
+
+    public void rimuoviTratta(Tratta tratta) {
+        this.tratte.remove(tratta);
+    }
 
     public UUID getId() {
         return id;
@@ -72,6 +78,9 @@ private Stato stato;
     }
 
 
+    public void setStato(Stato stato) {
+        this.stato = stato;
+    }
 
     @Override
     public String toString() {
@@ -79,8 +88,8 @@ private Stato stato;
                 "id=" + id +
                 ", capienza=" + capienza +
                 ", dataPrimoImpiego=" + dataPrimoImpiego +
+                ", tratte=" + tratte +
+                ", stato=" + stato +
                 '}';
     }
-
-
 }

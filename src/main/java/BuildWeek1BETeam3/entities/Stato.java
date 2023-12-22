@@ -11,11 +11,11 @@ public class Stato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private StatoMezzo stato;
     private LocalDate inizioManutenzione;
     private LocalDate fineManutenzione;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private TipoManutenzione tipoManutenzione;
 
     @OneToMany(mappedBy = "stato")
@@ -23,7 +23,16 @@ public class Stato {
 
     @ManyToOne
     @JoinColumn(name="storicoManutenzioni")
-private StoricoManutenzione storicoManutenzioni;
+    private StoricoManutenzione storicoManutenzioni;
+
+
+    public Stato() {}
+    public Stato(StatoMezzo stato, LocalDate inizioManutenzione, TipoManutenzione tipoManutenzione, MezzoDiTrasporto mezzo) {
+        this.stato = stato;
+        this.inizioManutenzione = inizioManutenzione;
+        this.tipoManutenzione = tipoManutenzione;
+        listaMezzi.add(mezzo);
+    }
 
     public StatoMezzo getStato() {
         return stato;
@@ -57,16 +66,37 @@ private StoricoManutenzione storicoManutenzioni;
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void aggiungiMezzo(MezzoDiTrasporto mezzo) {
+        this.listaMezzi.add(mezzo);
     }
 
-    public Stato(List<MezzoDiTrasporto> listaMezzi) {
-        this.listaMezzi=listaMezzi;
+    public void rimuoviMezzo(MezzoDiTrasporto mezzo) {
+        this.listaMezzi.remove(mezzo);
     }
-    public void setState(StatoMezzo stato){
-        this.stato=stato;
-        if (stato.equals(StatoMezzo.IN_MANUTENZIONE)){this.inizioManutenzione=LocalDate.now();}}
 
+    public Stato(StatoMezzo statoMezzo) {
+        this.stato = statoMezzo;
+    }
+    public void setState(StatoMezzo stato) {
+        this.stato = stato;
+        if (stato.equals(StatoMezzo.IN_MANUTENZIONE)) {
+            this.inizioManutenzione = LocalDate.now();
+        } else {
+            this.inizioManutenzione = null;
+            this.fineManutenzione = null;
+        }
+    }
 
+    @Override
+    public String toString() {
+        return "Stato{" +
+                "id=" + id +
+                ", stato=" + stato +
+                ", inizioManutenzione=" + inizioManutenzione +
+                ", fineManutenzione=" + fineManutenzione +
+                ", tipoManutenzione=" + tipoManutenzione +
+                ", listaMezzi=" + listaMezzi +
+                ", storicoManutenzioni=" + storicoManutenzioni +
+                '}';
+    }
 }
