@@ -1,12 +1,10 @@
 package BuildWeek1BETeam3.entities.DAO;
 
-import BuildWeek1BETeam3.entities.Abbonamento;
 import BuildWeek1BETeam3.entities.TitoloDiViaggio;
 import BuildWeek1BETeam3.entities.Utente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.UUID;
@@ -67,18 +65,10 @@ public class UtenteDAO {
         return query.getResultList();
     }
 
-
-
-    public Utente verificaCredenziali(String nomeUtente) {
-        try {
-            TypedQuery<Utente> query = em.createNamedQuery("credenziali_validi", Utente.class);
-            query.setParameter("nomeUtente", nomeUtente);
-            return query.getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
-
-        }
-
-
+    public Utente getFromLogin(String username, String password){
+        TypedQuery<Utente> query = em.createQuery("SELECT u FROM Utente u WHERE nome_utente = :nome AND password_utente = :password", Utente.class);
+        query.setParameter("nome", username);
+        query.setParameter("password", password);
+        return query.getSingleResult();
+    }
 }

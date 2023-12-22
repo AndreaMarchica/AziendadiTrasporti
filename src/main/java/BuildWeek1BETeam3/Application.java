@@ -8,14 +8,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
+    private static final Map<String, String> users = new HashMap<>();
+    static final Map<String, Boolean> isAdmin = new HashMap<>();
+    private static boolean logged = false;
+
+    private static Utente loggedUser = null;
+
+    private static boolean loggedUserAdmin = false;
+
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
@@ -25,7 +30,7 @@ public class Application {
 //        System.out.println(dao.findNumberTitoliByPeriod(LocalDate.now().minusWeeks(1), LocalDate.now().plusDays(20), UUID.fromString("8b5d8eaf-06b8-46f5-98d1-0de88d3f9c9a")));
 
 
-        Faker faker = new Faker(Locale.ITALIAN);
+/*        Faker faker = new Faker(Locale.ITALIAN);
 
         Supplier<LocalDate> dateSupplier = () -> {
             Random rdm = new Random();
@@ -46,8 +51,8 @@ public class Application {
         StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-  /*      for (int i = 0; i < 10; i++) {
-            Utente u = new Utente(faker.name().name(), faker.name().lastName());
+        for (int i = 0; i < 10; i++) {
+            Utente u = new Utente(faker.name().name(), faker.name().lastName(), faker.idNumber().ssnValid(), faker.bool().bool());
             ud.save(u);
         }
 
@@ -106,9 +111,6 @@ public class Application {
 
             }
         });
-//
-//
-//        //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
 
         //         **************************************** CREAZIONE DEI TITOLI DI VIAGGIO *******************************
 
@@ -133,140 +135,47 @@ public class Application {
         } else {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }*/
+        }
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
+ //       MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
 
 
         //ricupero una tratta dal db
 
         Tratta trattaUno = td.getById(UUID.fromString("1d345322-3f7f-4112-ba42-d309dc853c68"));
 
-        StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
+ //       StoricoTratte trattaNunzio = new StoricoTratte(LocalDate.now().minusDays(1), 10, trattaUno, berlusconiBus);
 
 //        std.save(trattaNunzio);
 
 
 //        **************************************CREAO UNO STATO DEL MEZZO***********************************
 
-        Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(), TipoManutenzione.STRAORDINARIA, berlusconiBus);
-        sd.save(manutenzione1);
+ //       Stato manutenzione1 = new Stato(StatoMezzo.IN_MANUTENZIONE, LocalDate.now(), TipoManutenzione.STRAORDINARIA, berlusconiBus);
+ //       sd.save(manutenzione1);
 
         //****************************ASSEGNO LO STATO AL MEZZO ESISTENTE PRESO DAL DATABASE**********
 
-        berlusconiBus.setStato(manutenzione1);
+//        berlusconiBus.setStato(manutenzione1);
 
 //       ***************************AGGIORNO LO STATO DEL MEZZO*************************************
 
-        mtd.save(berlusconiBus);
+ //       mtd.save(berlusconiBus);
 
+ //       handleUserLoginAndRegister();
 
+        Biglietto biglietto2 = (Biglietto) tvd.getById(UUID.fromString("1dac8686-beb5-4781-a1e6-8ea8b1574269"));
+        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("1bcc7861-3788-41b3-bb2a-3e8db1053b04"));
+        berlusconiBus.timbraBiglietto(biglietto2);
+        mtd.update(berlusconiBus);
 
+        new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
+        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);*/
 
-
-
-*/
-
-        String nomeUtente = "Aldo";
-        UtenteDAO utenteDAO = new UtenteDAO(em);
-        if (utenteDAO  == null) {
-            System.out.println("Tessera non è valida");
-        } else {
-            System.out.println("Tessera valida");
-            System.out.println(utenteDAO);
-        }
-
-//**********************************SCANNER********************************************
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Benvenuto in BerlusconiBus!");
-        System.out.println("·····································································");
-        System.out.println(":    _      ____   ____   _____                               _   _ :");
-        System.out.println(":   / \\    / ___| / ___| |_   _| __ __ _ ___ _ __   ___  _ __| |_(_):");
-        System.out.println(":  / _ \\  | |  _ | |  _    | || '__/ _` / __| '_ \\ / _ \\| '__| __| |:");
-        System.out.println(": / ___ \\ | |_| || |_| |   | || | | (_| \\__ \\ |_) | (_) | |  | |_| |:");
-        System.out.println(":/_/  \\_\\(_)____(_)____|   |_||_|  \\__,_|___/ .__/ \\___/|_|   \\__|_|:");
-        System.out.println(":                                           |_|                     :");
-        System.out.println("·····································································");
-
-        System.out.println("Accedi come: ");
-        System.out.println("1.Utente        2.Amministrattore");
-
-        int input = scanner.nextInt();
-        switch (input) {
-            case 1:
-                System.out.println("Inserisci le credenziali");
-                String nomeUtente1 = scanner.next();
-                switch (nomeUtente) {
-                    case "nomenellalista" :
-                        System.out.println("Benvenuto Nome Cognome");
-                        System.out.println("id");
-                        System.out.println("Scadenza Tessera : 123");
-                        //qua un altro case che guarda se la tessera è scaduta allora da l'opzione di rinnovarla.
-                        // qua un altro case che guarda se c'è presente un abbonamento valido.
-                        System.out.println("Tuo Abbonamento: ottieni tipo. è valido fino al 1234");
-                        break;
-                    default:
-                        System.out.println("Non è stato trovato nessun utente con quel nome");
-                        break;
-                }
-
-            case 2:
-                System.out.println("Inserisci i codice Amministratore");
-                short password = scanner.nextShort();
-                switch (password) {
-                    case 1234:
-                        System.out.println("Benvenuto Admin");
-                        System.out.println("1. Numero di mezzi");
-                        System.out.println("2. Numero di mezzi in manutenzione");
-                        System.out.println("3. Tratte");
-                        System.out.println("4. Verifica abbonamento Utente");
-                        System.out.println("5. Verifica Biglietto");
-                        System.out.println("6. Lista rivenditori ");
-                        System.out.println("7. Storico manutenzione");
-                        System.out.println("8. Lista Utenti");
-                        System.out.println("9. Lista Tessere");
-                        System.out.println("0. Esci");
-                        int chooseAdminOption = scanner.nextInt();
-                        switch (chooseAdminOption){
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                            case 8:
-                            case 9:
-                            case 10:
-                            default:
-                                System.out.println("Input non valido");
-                        }
-                    default:
-                        System.out.println("Credenziali Admin sbagliate");
-                        break;
-                }
-
-            default:
-                System.out.println("Invalid choice. Please enter a number between 1 and 4.");
-        }
-
-        scanner.close();
-
-
-
-
-
-
-
-
-
-
-
-
+        handleUserLoginAndRegister();
 
         em.close();
         emf.close();
@@ -277,7 +186,93 @@ public class Application {
         System.out.println("**************************************");
 
 
+
     }
 
-    
+
+    public static void handleUserLoginAndRegister() {
+
+        Scanner scanner = new Scanner(System.in);
+        EntityManager em = emf.createEntityManager();
+        UtenteDAO userDAO = new UtenteDAO(em);
+
+        List<Utente> usersDB = userDAO.getAll();
+
+        if(!usersDB.isEmpty()){
+            for(Utente user : usersDB){
+                String username = user.nome_utente;
+                String password = user.getPassword();
+                boolean isAdmin_bool = user.isAdmin();
+
+                users.put(username, password);
+                isAdmin.put(username, isAdmin_bool);
+
+                System.out.println(username + password);
+                System.out.println(users);
+            }
+        }
+
+
+        while (!logged) {
+            System.out.println("Seleziona un'opzione:");
+            System.out.println("1. Registrati come Utente Normale");
+            System.out.println("2. Registrati come Admin");
+            System.out.println("3. Effettua il login");
+            System.out.println("4. Esci");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                case 2:
+                    System.out.print("Inserisci il nome utente: ");
+                    String username = scanner.next();
+                    scanner.nextLine();                    System.out.print("Inserisci il cognome: ");
+                    String lastName = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Inserisci la password: ");
+                    String password = scanner.next();
+                    scanner.nextLine();
+                    if (!users.containsKey(username)) {
+                        users.put(username, password);
+                        //entra in questo case sia se la scelta é uno sia se é due.
+                        //quindi, per stabilire se é un admin, passo il risultato booleano della condizione choice == 2
+                        isAdmin.put(username, choice == 2);
+                        Utente newUser = new Utente(username, lastName, password, choice == 2);
+                        userDAO.save(newUser);
+                        System.out.println("Registrazione avvenuta con successo.");
+                        System.out.println(users);
+                    } else {
+                        System.out.println("Username già in uso. Riprova.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Inserisci il nome utente: ");
+                    String loginUsername = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Inserisci la password: ");
+                    String loginPassword = scanner.next();
+                    scanner.nextLine();
+                    if (users.containsKey(loginUsername) && users.get(loginUsername).equals(loginPassword)) {
+                        boolean isUserAdmin = isAdmin.get(loginUsername);
+                        if (isUserAdmin) {
+                            System.out.println("Accesso come Admin effettuato con successo per l'utente: " + loginUsername);
+                        } else {
+                            System.out.println("Accesso come Utente Normale effettuato con successo per l'utente: " + loginUsername);
+                        }
+                        loggedUser = userDAO.getFromLogin(loginUsername, loginPassword);
+                        logged = true;
+                    } else {
+                        System.out.println("Credenziali non valide. Riprova.");
+                    }
+                    break;
+                case 4:
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
+            }
+        }
+    }
 }
+

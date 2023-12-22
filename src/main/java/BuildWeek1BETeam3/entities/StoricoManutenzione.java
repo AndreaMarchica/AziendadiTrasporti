@@ -12,11 +12,16 @@ public class StoricoManutenzione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id_StoricoManutenzioni;
 
-
+    @OneToMany(mappedBy = "storicoManutenzione")
+    private List<MezzoDiTrasporto> listaMezziInManutenzione = new ArrayList<>();
     @OneToMany(mappedBy = "storicoManutenzioni")
     private List<Stato> storicoManutenzioni = new ArrayList<>();
 
-    public void StoricoManutenzione(){}
+    public StoricoManutenzione(){}
+
+    public StoricoManutenzione(MezzoDiTrasporto mezzoDiTrasporto){
+        listaMezziInManutenzione.add(mezzoDiTrasporto);
+    }
 
     public UUID getId_StoricoManutenzioni() {
         return id_StoricoManutenzioni;
@@ -37,6 +42,14 @@ public class StoricoManutenzione {
     }
     public void rimuoviStato(Stato stato) {
         this.storicoManutenzioni.remove(stato);
+    }
+
+    public List<MezzoDiTrasporto> getListaMezziInManutenzione() {
+        return listaMezziInManutenzione;
+    }
+
+    public void setListaMezziInManutenzione(List<MezzoDiTrasporto> listaMezziInManutenzione) {
+        this.listaMezziInManutenzione = listaMezziInManutenzione;
     }
 
     @Override

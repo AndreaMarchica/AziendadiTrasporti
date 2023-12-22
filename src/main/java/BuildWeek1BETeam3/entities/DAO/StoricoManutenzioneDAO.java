@@ -1,6 +1,7 @@
 package BuildWeek1BETeam3.entities.DAO;
 
 import BuildWeek1BETeam3.entities.MezzoDiTrasporto;
+import BuildWeek1BETeam3.entities.StoricoManutenzione;
 import BuildWeek1BETeam3.entities.TitoloDiViaggio;
 
 import javax.persistence.EntityManager;
@@ -9,41 +10,41 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.UUID;
 
-public class MezzoDiTrasportoDAO {
+public class StoricoManutenzioneDAO {
     private  EntityManager em;
 
-    public MezzoDiTrasportoDAO(EntityManager em) {
+    public StoricoManutenzioneDAO(EntityManager em) {
         this.em = em;
     }
 
-    public void save(MezzoDiTrasporto mezzoDiTrasporto) {
+    public void save(StoricoManutenzione storicoManutenzione) {
         try {
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
 
-            em.persist(mezzoDiTrasporto);
+            em.persist(storicoManutenzione);
 
             transaction.commit();
 
-            System.out.println("mezzo di trasporto salvato nel database.");
+            System.out.println("storico salvato nel database.");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public MezzoDiTrasporto getById(UUID id){
-        MezzoDiTrasporto found = em.find(MezzoDiTrasporto.class, id);
+    public StoricoManutenzione getById(UUID id){
+        StoricoManutenzione found = em.find(StoricoManutenzione.class, id);
         if(found == null){
-            System.out.println("nessun mezzo di trasporto trovato con quell'id");
+            System.out.println("nessuno storico trovato con quell'id");
         }
         return found;
     }
 
 
     public void delete(UUID id){
-        MezzoDiTrasporto found = this.getById(id);
+        StoricoManutenzione found = this.getById(id);
 
         if(found != null){
             EntityTransaction transaction = em.getTransaction();
@@ -54,30 +55,30 @@ public class MezzoDiTrasportoDAO {
 
             transaction.commit();
 
-            System.out.println("mezzo di trasporto rimosso dal database");
+            System.out.println("storico rimosso dal database");
         }else{
-            System.out.println("mezzo di trasporto non trovato, sicuro che l'id sia corretto?");
+            System.out.println("storico non trovato, sicuro che l'id sia corretto?");
         }
     }
 
-    public void update(MezzoDiTrasporto mezzoDiTrasporto) {
+    public void update(StoricoManutenzione storicoManutenzione) {
         try {
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
 
-            em.merge(mezzoDiTrasporto);
+            em.merge(storicoManutenzione);
 
             transaction.commit();
 
-            System.out.println("mezzo di trasporto aggiornato nel database.");
+            System.out.println("storico aggiornato nel database.");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public List<MezzoDiTrasporto> getAll(){
+/*    public List<MezzoDiTrasporto> getAll(){
         TypedQuery<MezzoDiTrasporto> query = em.createQuery("SELECT m from MezzoDiTrasporto m", MezzoDiTrasporto.class);
         return query.getResultList();
     }
@@ -85,5 +86,5 @@ public class MezzoDiTrasportoDAO {
     public List<MezzoDiTrasporto> getAllOutOfService(){
         TypedQuery<MezzoDiTrasporto> query = em.createNamedQuery("getAllOutOfService", MezzoDiTrasporto.class);
         return query.getResultList();
-    }
+    }*/
 }

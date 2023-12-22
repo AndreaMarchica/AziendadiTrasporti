@@ -17,6 +17,12 @@ public class Utente {
     @Column ( name = "nome_utente")
     public String nome_utente;
 
+    @Column(name = "password_utente", nullable = false)
+    private String password;
+
+    @Column(name = "admin")
+    private boolean isAdmin;
+
     @Column ( name = "cognome_utente")
     public  String cognome_utente;
 
@@ -24,12 +30,30 @@ public class Utente {
     private Tessera tessera;
 
 
-    public Utente(String nome_utente, String cognome_utente) {
+    public Utente(String nome_utente, String cognome_utente, String passwordUtente, boolean isAdmin) {
         this.nome_utente = nome_utente;
         this.cognome_utente = cognome_utente;
+        this.password = passwordUtente;
+        this.isAdmin = isAdmin;
     }
 
     public Utente() {
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
