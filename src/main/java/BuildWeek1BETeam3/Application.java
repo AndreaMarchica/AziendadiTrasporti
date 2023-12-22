@@ -181,11 +181,6 @@ public class Application {
         emf.close();
 
 
-        System.out.println("**************************************");
-        System.out.println("Hello Moto!");
-        System.out.println("**************************************");
-
-
     }
 
     public static int userOptions() {
@@ -248,9 +243,6 @@ public class Application {
 
                 users.put(username, password);
                 isAdmin.put(username, isAdmin_bool);
-
-                System.out.println(username + password);
-                System.out.println(users);
             }
         }
 
@@ -285,7 +277,6 @@ public class Application {
                         userDAO.save(newUser);
                         System.out.println("Registrazione avvenuta con successo.");
                         userInteract(true);
-                        System.out.println(users);
                     } else {
                         System.out.println("Username già in uso. Riprova.");
                     }
