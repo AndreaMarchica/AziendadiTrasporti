@@ -13,6 +13,9 @@ import java.util.function.Supplier;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
+    private static final Map<String, String> users = new HashMap<>();
+    private static final Map<String, Boolean> isAdmin = new HashMap<>();
+    private static boolean logged = false;
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
@@ -173,46 +176,64 @@ public class Application {
 
 
     public static void handleUserLoginAndRegister() {
-        Map<String, String> users = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
 
-        do {
+        Scanner scanner = new Scanner(System.in);
+
+
+        while (!logged) {
             System.out.println("Seleziona un'opzione:");
-            System.out.println("1. Registrati");
-            System.out.println("2. Effettua il login");
-            System.out.println("3. Esci");
+            System.out.println("1. Registrati come Utente Normale");
+            System.out.println("2. Registrati come Admin");
+            System.out.println("3. Effettua il login");
+            System.out.println("4. Esci");
             int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
-                case 1 -> {
+                case 1:
+                case 2:
                     System.out.print("Inserisci il nome utente: ");
                     String username = scanner.next();
+                    scanner.nextLine();
                     System.out.print("Inserisci la password: ");
                     String password = scanner.next();
+                    scanner.nextLine();
                     if (!users.containsKey(username)) {
                         users.put(username, password);
+                        //entra in questo case sia se la scelta é uno sia se é due.
+                        //quindi, per stabilire se é un admin, passo il risultato booleano della condizione choice == 2
+                        isAdmin.put(username, choice == 2);
                         System.out.println("Registrazione avvenuta con successo.");
                     } else {
-                        System.out.println("Username già in uso. riprova.");
+                        System.out.println("Username già in uso. Riprova.");
                     }
-                }
-                case 2 -> {
+                    break;
+                case 3:
                     System.out.print("Inserisci il nome utente: ");
-                    String username_ = scanner.next();
+                    String loginUsername = scanner.next();
+                    scanner.nextLine();
                     System.out.print("Inserisci la password: ");
-                    String password_ = scanner.next();
-                    if (users.containsKey(username_) && users.get(username_).equals(password_)) {
-                        System.out.println("Login effettuato con successo per l'utente: " + username_);
+                    String loginPassword = scanner.next();
+                    scanner.nextLine();
+                    if (users.containsKey(loginUsername) && users.get(loginUsername).equals(loginPassword)) {
+                        boolean isUserAdmin = isAdmin.get(loginUsername);
+                        if (isUserAdmin) {
+                            System.out.println("Accesso come Admin effettuato con successo per l'utente: " + loginUsername);
+                        } else {
+                            System.out.println("Accesso come Utente Normale effettuato con successo per l'utente: " + loginUsername);
+                        }
+                        logged = true;
                     } else {
                         System.out.println("Credenziali non valide. Riprova.");
                     }
-                }
-                default -> exit = true;
+                    break;
+                case 4:
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
             }
-        } while (!exit);
-
-        scanner.close();
+        }
     }
 }
 
