@@ -8,14 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
+    private static final Map<String, String> users = new HashMap<>();
+    private static final Map<String, Boolean> isAdmin = new HashMap<>();
+    private static boolean logged = false;
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
@@ -135,7 +135,7 @@ public class Application {
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
+       /* MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
 
 
         //ricupero una tratta dal db
@@ -158,8 +158,9 @@ public class Application {
 
 //       ***************************AGGIORNO LO STATO DEL MEZZO*************************************
 
-        mtd.save(berlusconiBus);
+        mtd.save(berlusconiBus);*/
 
+        handleUserLoginAndRegister();
 
 
         em.close();
@@ -173,6 +174,66 @@ public class Application {
 
     }
 
-    
+
+    public static void handleUserLoginAndRegister() {
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        while (!logged) {
+            System.out.println("Seleziona un'opzione:");
+            System.out.println("1. Registrati come Utente Normale");
+            System.out.println("2. Registrati come Admin");
+            System.out.println("3. Effettua il login");
+            System.out.println("4. Esci");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                case 2:
+                    System.out.print("Inserisci il nome utente: ");
+                    String username = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Inserisci la password: ");
+                    String password = scanner.next();
+                    scanner.nextLine();
+                    if (!users.containsKey(username)) {
+                        users.put(username, password);
+                        //entra in questo case sia se la scelta é uno sia se é due.
+                        //quindi, per stabilire se é un admin, passo il risultato booleano della condizione choice == 2
+                        isAdmin.put(username, choice == 2);
+                        System.out.println("Registrazione avvenuta con successo.");
+                    } else {
+                        System.out.println("Username già in uso. Riprova.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Inserisci il nome utente: ");
+                    String loginUsername = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Inserisci la password: ");
+                    String loginPassword = scanner.next();
+                    scanner.nextLine();
+                    if (users.containsKey(loginUsername) && users.get(loginUsername).equals(loginPassword)) {
+                        boolean isUserAdmin = isAdmin.get(loginUsername);
+                        if (isUserAdmin) {
+                            System.out.println("Accesso come Admin effettuato con successo per l'utente: " + loginUsername);
+                        } else {
+                            System.out.println("Accesso come Utente Normale effettuato con successo per l'utente: " + loginUsername);
+                        }
+                        logged = true;
+                    } else {
+                        System.out.println("Credenziali non valide. Riprova.");
+                    }
+                    break;
+                case 4:
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
+            }
+        }
+    }
 }
 
