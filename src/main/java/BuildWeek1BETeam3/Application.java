@@ -8,9 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class Application {
@@ -134,7 +132,7 @@ public class Application {
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
         // ricupero il mezzo dal db
-        MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
+       /* MezzoDiTrasporto berlusconiBus = mtd.getById(UUID.fromString("00b02f09-b816-47ea-93db-0ed1f0528a9c"));
 
 
         //ricupero una tratta dal db
@@ -157,8 +155,9 @@ public class Application {
 
 //       ***************************AGGIORNO LO STATO DEL MEZZO*************************************
 
-        mtd.save(berlusconiBus);
+        mtd.save(berlusconiBus);*/
 
+        handleUserLoginAndRegister();
 
 
         em.close();
@@ -172,6 +171,48 @@ public class Application {
 
     }
 
-    
+
+    public static void handleUserLoginAndRegister() {
+        Map<String, String> users = new HashMap<>();
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+
+        do {
+            System.out.println("Seleziona un'opzione:");
+            System.out.println("1. Registrati");
+            System.out.println("2. Effettua il login");
+            System.out.println("3. Esci");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Inserisci il nome utente: ");
+                    String username = scanner.next();
+                    System.out.print("Inserisci la password: ");
+                    String password = scanner.next();
+                    if (!users.containsKey(username)) {
+                        users.put(username, password);
+                        System.out.println("Registrazione avvenuta con successo.");
+                    } else {
+                        System.out.println("Username già in uso. riprova.");
+                    }
+                }
+                case 2 -> {
+                    System.out.print("Inserisci il nome utente: ");
+                    String username_ = scanner.next();
+                    System.out.print("Inserisci la password: ");
+                    String password_ = scanner.next();
+                    if (users.containsKey(username_) && users.get(username_).equals(password_)) {
+                        System.out.println("Login effettuato con successo per l'utente: " + username_);
+                    } else {
+                        System.out.println("Credenziali non valide. Riprova.");
+                    }
+                }
+                default -> exit = true;
+            }
+        } while (!exit);
+
+        scanner.close();
+    }
 }
 
