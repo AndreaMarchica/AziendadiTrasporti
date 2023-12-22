@@ -14,8 +14,13 @@ import java.util.function.Supplier;
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AziendaDiTrasporti");
     private static final Map<String, String> users = new HashMap<>();
-    private static final Map<String, Boolean> isAdmin = new HashMap<>();
+    static final Map<String, Boolean> isAdmin = new HashMap<>();
     private static boolean logged = false;
+
+    private static Utente loggedUser = null;
+
+    private static boolean loggedUserAdmin = false;
+
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
@@ -25,7 +30,7 @@ public class Application {
 //        System.out.println(dao.findNumberTitoliByPeriod(LocalDate.now().minusWeeks(1), LocalDate.now().plusDays(20), UUID.fromString("8b5d8eaf-06b8-46f5-98d1-0de88d3f9c9a")));
 
 
-        Faker faker = new Faker(Locale.ITALIAN);
+/*        Faker faker = new Faker(Locale.ITALIAN);
 
         Supplier<LocalDate> dateSupplier = () -> {
             Random rdm = new Random();
@@ -46,8 +51,8 @@ public class Application {
         StatoDao sd = new StatoDao(em);
 
 //  ****************************************CREAZIONE E SALVATAGGIO DEGLI UTENTI************************************
-/*        for (int i = 0; i < 10; i++) {
-            Utente u = new Utente(faker.name().name(), faker.name().lastName());
+        for (int i = 0; i < 10; i++) {
+            Utente u = new Utente(faker.name().name(), faker.name().lastName(), faker.idNumber().ssnValid(), faker.bool().bool());
             ud.save(u);
         }
 
@@ -130,7 +135,7 @@ public class Application {
         } else {
             System.out.println("Tessera valida");
             System.out.println(tesseraDAO.isAbbonamentoValido(tesseraId));
-        }*/
+        }
 
 //        System.out.println(td.contaPercorsi(UUID.fromString("0d1c4f10-82af-4b05-812b-b824d2f5751d")));
 
@@ -168,7 +173,9 @@ public class Application {
         mtd.update(berlusconiBus);
 
         new MezzoDiTrasportoDAO(em).getAllOutOfService().forEach(System.out::println);
-        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);
+        new TitoloDiViaggioDAO(em).getAllVidimati().forEach(System.out::println);*/
+
+        handleUserLoginAndRegister();
 
         em.close();
         emf.close();
@@ -186,6 +193,24 @@ public class Application {
     public static void handleUserLoginAndRegister() {
 
         Scanner scanner = new Scanner(System.in);
+        EntityManager em = emf.createEntityManager();
+        UtenteDAO userDAO = new UtenteDAO(em);
+
+        List<Utente> usersDB = userDAO.getAll();
+
+        if(!usersDB.isEmpty()){
+            for(Utente user : usersDB){
+                String username = user.nome_utente;
+                String password = user.getPassword();
+                boolean isAdmin_bool = user.isAdmin();
+
+                users.put(username, password);
+                isAdmin.put(username, isAdmin_bool);
+
+                System.out.println(username + password);
+                System.out.println(users);
+            }
+        }
 
 
         while (!logged) {
@@ -202,6 +227,8 @@ public class Application {
                 case 2:
                     System.out.print("Inserisci il nome utente: ");
                     String username = scanner.next();
+                    scanner.nextLine();                    System.out.print("Inserisci il cognome: ");
+                    String lastName = scanner.next();
                     scanner.nextLine();
                     System.out.print("Inserisci la password: ");
                     String password = scanner.next();
@@ -211,7 +238,10 @@ public class Application {
                         //entra in questo case sia se la scelta é uno sia se é due.
                         //quindi, per stabilire se é un admin, passo il risultato booleano della condizione choice == 2
                         isAdmin.put(username, choice == 2);
+                        Utente newUser = new Utente(username, lastName, password, choice == 2);
+                        userDAO.save(newUser);
                         System.out.println("Registrazione avvenuta con successo.");
+                        System.out.println(users);
                     } else {
                         System.out.println("Username già in uso. Riprova.");
                     }
@@ -230,6 +260,7 @@ public class Application {
                         } else {
                             System.out.println("Accesso come Utente Normale effettuato con successo per l'utente: " + loginUsername);
                         }
+                        loggedUser = userDAO.getFromLogin(loginUsername, loginPassword);
                         logged = true;
                     } else {
                         System.out.println("Credenziali non valide. Riprova.");
